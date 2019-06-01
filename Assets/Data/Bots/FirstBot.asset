@@ -1,0 +1,18 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 6e08127c86fb8d54a985202b11f848eb, type: 3}
+  m_Name: FirstBot
+  m_EditorClassIdentifier: 
+  chassis: {fileID: 11400000, guid: 0f3a9a08d0e9654488eedef8ac961fce, type: 2}
+  wheels: {fileID: 11400000, guid: 172b58f5accb042428265ac0e48402b8, type: 2}
+  attachements:
+  - {fileID: 11400000, guid: 011a1bdbcbb7bdc4a90eec9e80b2efd9, type: 2}
