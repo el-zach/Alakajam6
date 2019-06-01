@@ -14,6 +14,7 @@ public class BotConfiguator : MonoBehaviour
     public void GenerateBotFromData(BotData bot)
     {
         GameObject newBot = new GameObject();
+        newBot.transform.position = transform.position;
         newBot.AddComponent<BotBrain>();
         var script = newBot.AddComponent<Bot>();
         script.wheels = InstantiateFromPart(bot.wheels,newBot.transform);

@@ -6,7 +6,7 @@ using UnityEngine.Events;
 public class BotBrain : MonoBehaviour
 {
 
-    public UnityEvent OnAttack, OnHealthLow, OnChase;
+    
 
     // Start is called before the first frame update
     void Start()
