@@ -12,4 +12,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 6fc84f17ecd65674d874578bb81ab6a5, type: 3}
   m_Name: New Logic Data
   m_EditorClassIdentifier: 
-  logicBlocks: []
+  logicBlocks:
+  - triggerType: 0
+    rotation: {x: 0, y: 0, z: 0}
+    executeOn: {fileID: 0}

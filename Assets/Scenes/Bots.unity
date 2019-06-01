@@ -183,6 +183,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   defaultBot: {fileID: 11400000, guid: 9367f267911db1246962ed859e3f4b76, type: 2}
+  activeBot: {fileID: 0}
 --- !u!4 &308892537
 Transform:
   m_ObjectHideFlags: 0
@@ -602,7 +603,18 @@ MonoBehaviour:
   m_TargetGraphic: {fileID: 661942599}
   m_OnClick:
     m_PersistentCalls:
-      m_Calls: []
+      m_Calls:
+      - m_Target: {fileID: 308892536}
+        m_MethodName: GenerateRandomBot
+        m_Mode: 1
+        m_Arguments:
+          m_ObjectArgument: {fileID: 0}
+          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
+          m_IntArgument: 0
+          m_FloatArgument: 0
+          m_StringArgument: 
+          m_BoolArgument: 0
+        m_CallState: 2
     m_TypeName: UnityEngine.UI.Button+ButtonClickedEvent, Unity.ugui, Version=1.0.0.0,
       Culture=neutral, PublicKeyToken=null
 --- !u!114 &661942599
@@ -661,7 +673,7 @@ GameObject:
   - component: {fileID: 722718638}
   - component: {fileID: 722718637}
   m_Layer: 5
-  m_Name: Button (1)
+  m_Name: Script Here pls
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -839,7 +851,7 @@ MonoBehaviour:
     m_HorizontalOverflow: 0
     m_VerticalOverflow: 0
     m_LineSpacing: 1
-  m_Text: Button
+  m_Text: Generate Random
 --- !u!222 &966207298
 CanvasRenderer:
   m_ObjectHideFlags: 0
@@ -1119,7 +1131,7 @@ MonoBehaviour:
     m_HorizontalOverflow: 0
     m_VerticalOverflow: 0
     m_LineSpacing: 1
-  m_Text: Button
+  m_Text: Upload To Cloud
 --- !u!222 &1323809644
 CanvasRenderer:
   m_ObjectHideFlags: 0
@@ -1232,15 +1244,15 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   parts:
-  - {fileID: 11400000, guid: 97bed3cc568af154a8318196af7f930f, type: 2}
-  - {fileID: 11400000, guid: 0f3a9a08d0e9654488eedef8ac961fce, type: 2}
-  - {fileID: 11400000, guid: c415cc6ff4eb0a245a55cc91eec92e28, type: 2}
+  - {fileID: 11400000, guid: 1dee13e035d0e6846917ee1f9153b3ff, type: 2}
+  - {fileID: 11400000, guid: a1971c850310c3846b320a21a71d78b9, type: 2}
+  - {fileID: 11400000, guid: 9831a1458af93044aa3e46d07c313987, type: 2}
   - {fileID: 11400000, guid: e00dc2dfba2a4454ab78e6c0bd8958dc, type: 2}
   - {fileID: 11400000, guid: 011a1bdbcbb7bdc4a90eec9e80b2efd9, type: 2}
   - {fileID: 11400000, guid: e290f6a946727104b92ba7dff516504e, type: 2}
-  - {fileID: 11400000, guid: 172b58f5accb042428265ac0e48402b8, type: 2}
-  - {fileID: 11400000, guid: 371eaf6441bd0aa43a6d6ead0a4be122, type: 2}
-  - {fileID: 11400000, guid: 48e9a8cc26c1bd348a1bfbfcfec28f96, type: 2}
+  - {fileID: 11400000, guid: 391ff03c8ecdd7b4581df1e45409deae, type: 2}
+  - {fileID: 11400000, guid: 63d6c23bd19f9d54f9000f191945bbd3, type: 2}
+  - {fileID: 11400000, guid: b8d83c76960a1134ca579a9a1313ea8e, type: 2}
 --- !u!4 &1712022127
 Transform:
   m_ObjectHideFlags: 0

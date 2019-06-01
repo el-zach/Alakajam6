@@ -6,7 +6,8 @@ using UnityEngine;
 [CreateAssetMenu]
 public class BotData : ScriptableObject {
 
-    public PartData chassis, wheels;
+    public ChassisData chassis;
+    public WheelData wheels;
     public List<PartData> attachements;
 
 }
