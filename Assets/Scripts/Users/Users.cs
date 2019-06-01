@@ -64,7 +64,8 @@ public class Users : MonoBehaviour
         );
     }
 
-    void CreateRandomUser()
+    [ContextMenu("Create Random User")]
+    public void CreateRandomUser()
     {
         CreateUserRequest randomUser = new CreateUserRequest(
             _type: "put-data",
@@ -80,9 +81,9 @@ public class Users : MonoBehaviour
         GameSync.instance.SendData(randomUser, "Create Random User");
     }
 
-    void Start () {
+    /*void Start () {
         CreateRandomUser();
-    }
+    }*/
 
     float currentUpdateUserListInterval = 9999;
     void UpdateUserList () {
