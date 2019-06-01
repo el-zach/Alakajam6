@@ -28,7 +28,7 @@ sysinfo.txt
 .consulo/
 /*.tmp
 /*.svd
- 
+
 # ============ #
 # OS generated #
 # ============ #
@@ -42,3 +42,5 @@ ehthumbs.db
 [Dd]esktop.ini
 Corridor/Library/ShaderCache/
 Corridor/Library/metadata/
+*.swp
+*.vscode
