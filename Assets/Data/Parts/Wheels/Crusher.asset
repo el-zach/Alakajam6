@@ -9,7 +9,7 @@ MonoBehaviour:
   m_GameObject: {fileID: 0}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 6b9bd68f152217b4799904679c9e76ef, type: 3}
+  m_Script: {fileID: 11500000, guid: 1d2dafe000deb594989c88f21f47c4c8, type: 3}
   m_Name: Crusher
   m_EditorClassIdentifier: 
   prefab: {fileID: 6556601573023926817, guid: 1ec3d2fddb52add488a936dc2f008a8b, type: 3}

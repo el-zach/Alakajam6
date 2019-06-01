@@ -2,7 +2,7 @@
 using System.Collections.Generic;
 using UnityEngine;
 
-[CreateAssetMenu]
+
 public class PartData : ScriptableObject
 {
     public GameObject prefab;
