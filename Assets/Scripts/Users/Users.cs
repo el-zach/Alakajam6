@@ -19,21 +19,20 @@ public class Users : MonoBehaviour
         }
     }
 
-    [System.Serializable]
     public class User : NewUser {
         public int id;
     }
 
     public class CreateUserRequest
     {
-        [SerializeField]
-        string type = "put-data";
-        [SerializeField]
-        string db = "beyblade";
-        [SerializeField]
-        string table = "users";
-        [SerializeField]
-        NewUser fields = new NewUser();
+
+        public string type = "put-data";
+
+        public string db = "beyblade";
+
+        public string table = "users";
+
+        public NewUser fields = new NewUser();
 
         public CreateUserRequest(string _type = "", string _db = "", string _table = "", NewUser _fields = null)
         {
@@ -44,7 +43,6 @@ public class Users : MonoBehaviour
         }
     }
 
-    [System.Serializable]
     public class UserList
     {
         public User[] fields;

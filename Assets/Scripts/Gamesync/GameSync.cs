@@ -55,6 +55,8 @@ public class GameSync : MonoBehaviour
     IEnumerator _SendData(object blob, string jobName)
     {
         WWWForm content = new WWWForm();
+        string jsonTest = JsonConvert.SerializeObject(blob);
+        Debug.Log(jsonTest);
         string blobJson = Convert.ToBase64String(Encoding.UTF8.GetBytes(JsonConvert.SerializeObject(blob)));
         content.AddField("content", blobJson);
 
