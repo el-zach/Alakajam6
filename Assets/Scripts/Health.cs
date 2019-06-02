@@ -5,12 +5,16 @@ using UnityEngine.Events;
 
 public class Health : MonoBehaviour
 {
+    [System.Serializable]
+    public class Event : UnityEvent<Bot> { }
+
     public float maxHealth=12f;
     public Bot bot;
 
     [Header("Runtime")]
     public float currentHealth;
-    public UnityEvent OnDeath, OnDamage;
+    public Event OnDeath;
+    public UnityEvent OnDamage;
 
     private void Start()
     {
@@ -42,7 +46,7 @@ public class Health : MonoBehaviour
             Destroy(gameObject);
         }*/
 
-        OnDeath.Invoke();
+        OnDeath.Invoke(bot);
     }
 
 
