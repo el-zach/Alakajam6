@@ -24,7 +24,7 @@ public class BotConfiguator : MonoBehaviour
     public BotData playerBotData;
 
     public GameObject activeBot;
-
+    public UnityEngine.UI.Text botCountText;
     public BotList botList;
 
     public bool generateBotWithPlayerInput = false;
@@ -62,6 +62,12 @@ public class BotConfiguator : MonoBehaviour
             //NumberOfActiveUsers = userList.fields.Length;
             GameSync.instance.results.Remove("Get Bots");
             GetBotsFromFields();
+            botCountText.text = "Bots in database: " + botList.fields.Length;
+        }
+
+        if (Input.GetKeyDown(KeyCode.K))
+        {
+            GetAllBots();
         }
     }
 
@@ -259,6 +265,7 @@ public class BotConfiguator : MonoBehaviour
         {
             Debug.LogWarning("req is null <b>:></b>");
         }
+        activeBot = null;
     }
 
     
