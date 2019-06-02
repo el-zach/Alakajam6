@@ -24,6 +24,8 @@ public class BotConfiguator : MonoBehaviour
 
     public bool generateBotWithPlayerInput = false;
 
+    public GameObject playerSelectionRing;
+
     private void Start()
     {
         //activeBot = GenerateBotFromData(myBotData,generateBotWithPlayerInput,transform);
@@ -135,7 +137,7 @@ public class BotConfiguator : MonoBehaviour
         newBot.name = bot.botName;
         if(spawnContainer)
             newBot.transform.position = spawnContainer.position;
-        newBot.AddComponent<BotBrain>();
+        var brain = newBot.AddComponent<BotBrain>();
         var bCol = newBot.AddComponent<BoxCollider>();
         bCol.center = Vector3.up;
         bCol.size = new Vector3(2.5f,2f,2.5f);
@@ -150,8 +152,11 @@ public class BotConfiguator : MonoBehaviour
 
         newBot.GetComponentInChildren<HealthBar>().nameText.text = bot.botName;
 
-        if(_playerInput)
+        if (_playerInput)
+        {
             newBot.AddComponent<PlayerInput>();
+            brain.useBrain = false;
+        }
 
         return newBot;
     }

@@ -18,6 +18,6 @@ MonoBehaviour:
   weight: 0
   maxHealth: 0
   logic: {fileID: 11400000, guid: 09d09711adadfbe4399841217655e197, type: 2}
-  fireRate: 3
-  salveCount: 5
-  salveCooldown: 1
+  fireRate: 6
+  salveCount: 12
+  salveCooldown: 2
