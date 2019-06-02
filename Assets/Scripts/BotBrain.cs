@@ -45,6 +45,8 @@ public class BotBrain : MonoBehaviour
     IEnumerator SetTarget(float _time)
     {
         yield return new WaitForSeconds(_time);
+        while (!botIWantToDestroy) yield return new WaitForSeconds(0.3f);
+
         myTarget.position = botIWantToDestroy.transform.position;
         if(useBrain)
             StartCoroutine(SetTarget(Random.Range(0f,1.5f)));
@@ -59,7 +61,7 @@ public class BotBrain : MonoBehaviour
             botIWantToDestroy = null;
             return;
         }
-        botIWantToDestroy.GetComponent<Health>().OnDeath.AddListener(GetATarget);
+        botIWantToDestroy?.GetComponent<Health>().OnDeath.AddListener(GetATarget);
     }
 
 }
