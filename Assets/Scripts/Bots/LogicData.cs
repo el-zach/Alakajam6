@@ -29,7 +29,7 @@ public class LogicData : ScriptableObject
             }
             if (triggerType == TriggerType.Movement)
             {
-                bot.OnChase.AddListener(Execute);
+                bot.OnMove.AddListener(Execute);
             }
         }
 

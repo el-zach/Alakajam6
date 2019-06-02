@@ -40,8 +40,20 @@ public class BotConfiguator : MonoBehaviour
     {
         GameSync.instance.GetData(
             jobName: "Get Bots",
-            parameters: new string[] { "type=get-all", "from=bots", "db=beyblade" }
+            parameters: new string[] { "type=get-all", "from=botsNEW", "db=beyblade" }
         );
+    }
+
+    public UnityEngine.UI.InputField nameField;
+    public void NameBot()
+    {
+        NameBot(nameField.text);
+    }
+
+    public void NameBot(string _newName)
+    {
+        if(_newName.Length>1)
+            myBotData.botName = _newName;
     }
 
     public void GenerateRandomBot()
@@ -134,7 +146,7 @@ public class BotConfiguator : MonoBehaviour
     {
         public string type = "put-data";
         public string db = "beyblade";
-        public string table = "bots";
+        public string table = "botsNEW";
         public NewBot fields;
 
         public CreateBotRequest(NewBot _fields=null)
@@ -150,7 +162,7 @@ public class BotConfiguator : MonoBehaviour
 
             db = "beyblade";
 
-            table = "bots";
+            table = "botsNEW";
 
             fields = _fields;
         }

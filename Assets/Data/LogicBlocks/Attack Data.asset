@@ -10,7 +10,7 @@ MonoBehaviour:
   m_Enabled: 1
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: 6fc84f17ecd65674d874578bb81ab6a5, type: 3}
-  m_Name: New Logic Data
+  m_Name: Attack Data
   m_EditorClassIdentifier: 
   logicBlocks:
   - triggerType: 0
