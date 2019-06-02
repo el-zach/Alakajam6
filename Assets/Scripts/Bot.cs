@@ -158,5 +158,10 @@ public class Bot : MonoBehaviour
         rigid.MoveRotation(Quaternion.Lerp(startRotation,targetRotation,2f*currentSpurt/spurtDuration));
     }
 
+    public void DeRegisterBulletCollider(Bullet bullet)
+    {
+        toExclude.Remove(bullet.myCollider);
+    }
+
 
 }
