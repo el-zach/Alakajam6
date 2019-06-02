@@ -40,6 +40,8 @@ public class ARRaycaster : MonoBehaviour
             // Debug.Log("raycasting onto scene");
             if(Physics.Raycast(ray, out hit))
             {
+                Debug.Log("hit " + (hit.collider?.gameObject?.name ?? " null") + " at " + hit.point);
+
                 // trigger effect on raycasted object
                 //var ke = hit.collider.GetComponent<KillElement>();
                 //if (ke) {
@@ -71,7 +73,9 @@ public class ARRaycaster : MonoBehaviour
     {
         var r = GetRandomPrefab();
         if(r)
-        { 
+        {
+            Debug.Log("Spawning " + r.name);
+
             var newT = Instantiate<Transform>(r, rig.GetComponent<ARSessionOrigin>().trackablesParent);
             newT.localPosition = relativePos;
             newT.localRotation = relativeRot * Quaternion.Euler(0,180,0);
