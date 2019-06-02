@@ -354,6 +354,7 @@ MonoBehaviour:
   myBotData: {fileID: 11400000, guid: 9367f267911db1246962ed859e3f4b76, type: 2}
   playerBotData: {fileID: 0}
   activeBot: {fileID: 0}
+  botCountText: {fileID: 0}
   botList:
     fields: []
   generateBotWithPlayerInput: 0
@@ -2070,16 +2071,6 @@ PrefabInstance:
         type: 3}
       propertyPath: m_LocalEulerAnglesHint.z
       value: 0
-      objectReference: {fileID: 0}
-    - target: {fileID: 3430222446339448992, guid: eeb246ae10df2104d8ba55c02ed3d22d,
-        type: 3}
-      propertyPath: m_PlayOnAwake
-      value: 1
-      objectReference: {fileID: 0}
-    - target: {fileID: 3430222446595140022, guid: eeb246ae10df2104d8ba55c02ed3d22d,
-        type: 3}
-      propertyPath: nameField
-      value: 
       objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: eeb246ae10df2104d8ba55c02ed3d22d, type: 3}
