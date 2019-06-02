@@ -57,7 +57,8 @@ public class BotConfiguator : MonoBehaviour
 
         if (GameSync.instance.results.ContainsKey("Get Bots"))
         {
-            botList = JsonConvert.DeserializeObject<BotList>(GameSync.instance.results["Get Bots"]);
+            botList = JsonUtility.FromJson<BotList>(GameSync.instance.results["Get Bots"]);
+            // botList = JsonConvert.DeserializeObject<BotList>(GameSync.instance.results["Get Bots"]);
             //NumberOfActiveUsers = userList.fields.Length;
             GameSync.instance.results.Remove("Get Bots");
             GetBotsFromFields();
@@ -84,7 +85,9 @@ public class BotConfiguator : MonoBehaviour
             Debug.LogError("[SendBotToCLoud] Suddenly botdata went missing");
             return;
         }
-        UpdateBotRequest req = new UpdateBotRequest(1,_fields: new NewBot(botData));
+        var nb = new NewBot();
+        nb.InitFromData(botData);
+        UpdateBotRequest req = new UpdateBotRequest(1, nb);
         if (req != null)
         {
             Debug.Log("[SendActiveBot] req is not null <b>:></b>");
@@ -144,6 +147,8 @@ public class BotConfiguator : MonoBehaviour
     public static GameObject GenerateBotFromData(BotData bot, bool _playerInput, bool generatePreview, Transform spawnContainer = null)
     {
         //GameObject newBot = new GameObject();
+        Debug.Log("Spawning Bot " + bot.name);
+        
         GameObject newBot = Instantiate(singleton.botPrefab);
         newBot.name = bot.botName;
         if(spawnContainer)
@@ -242,7 +247,9 @@ public class BotConfiguator : MonoBehaviour
             Debug.LogError("[SendBotToCLoud] Suddenly botdata went missing");
             return;
         }
-        CreateBotRequest req = new CreateBotRequest(_fields: new NewBot(botData));
+        var nb = new NewBot();
+        nb.InitFromData(botData);
+        CreateBotRequest req = new CreateBotRequest(nb);
         if (req != null)
         {
             Debug.Log("[SendActiveBot] req is not null <b>:></b>");
@@ -329,16 +336,16 @@ public class BotConfiguator : MonoBehaviour
         public int mantle;
         public int killCount=0;
 
-        public NewBot(BotData botData=null)
+        public void InitFromData(BotData botData)
         {
-            if (botData==null)
+            if (botData == null)
             {
                 Debug.LogWarning("[NewBot] MISSING BOTDATA");
                 return;
             }
             name = botData.botName;
-            Debug.Log("[NewBot] Trying to find " + botData.wheels.name+" Found at: "+  PartDatabase.singleton.parts.FindIndex(x => x == botData.wheels));
-            wheels = PartDatabase.singleton.parts.FindIndex( x=>x == botData.wheels);
+            Debug.Log("[NewBot] Trying to find " + botData.wheels.name + " Found at: " + PartDatabase.singleton.parts.FindIndex(x => x == botData.wheels));
+            wheels = PartDatabase.singleton.parts.FindIndex(x => x == botData.wheels);
             Debug.Log("[NewBot] Trying to find " + botData.chassis.name + " Found at: " + PartDatabase.singleton.parts.FindIndex(x => x == botData.chassis));
             chassis = PartDatabase.singleton.parts.FindIndex(x => x == botData.chassis);
 
@@ -360,6 +367,11 @@ public class BotConfiguator : MonoBehaviour
             attachments = System.Convert.ToBase64String(System.Text.Encoding.UTF8.GetBytes(JsonConvert.SerializeObject(attachmentsInt)));*/
             //attachments = "TODO";
 
+        }
+
+        public NewBot()
+        {
+            
         }
     }
 

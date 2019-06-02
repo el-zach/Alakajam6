@@ -11,16 +11,21 @@ public class BotSpawn : MonoBehaviour
 
     public void SpawnBot()
     {
-
-        if (botData == null && BotConfiguator.singleton.possibleBots.Count>0)
+        try { 
+            if (botData == null && BotConfiguator.singleton.possibleBots.Count>0)
+            {
+                botData = BotConfiguator.singleton.possibleBots[Random.Range(0, BotConfiguator.singleton.possibleBots.Count)];
+            }
+            if (botData)
+            {
+                var newBot = BotConfiguator.GenerateBotFromData(botData, playerBot, false, transform);
+                if(enableOnDeath)
+                    newBot.GetComponent<Health>().OnDeath.AddListener(EnableOnDeath);
+            }
+        } 
+        catch(System.Exception e)
         {
-            botData = BotConfiguator.singleton.possibleBots[Random.Range(0, BotConfiguator.singleton.possibleBots.Count)];
-        }
-        if (botData)
-        {
-            var newBot = BotConfiguator.GenerateBotFromData(botData, playerBot, false, transform);
-            if(enableOnDeath)
-                newBot.GetComponent<Health>().OnDeath.AddListener(EnableOnDeath);
+            Debug.LogWarning("exception on bot creation: " + e);
         }
     }
 
