@@ -10,7 +10,7 @@ public class Bot : MonoBehaviour
 
     public BotData data;
 
-    public GameObject wheels, chassis, weapon;
+    public GameObject wheels, chassis, weapon, motor, mantle;
 
     public UnityEvent OnAttack= new UnityEvent(), OnHealthLow = new UnityEvent(), OnChase = new UnityEvent(), OnUpdate = new UnityEvent();
 

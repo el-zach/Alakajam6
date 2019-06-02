@@ -55,9 +55,18 @@ public class BotConfiguator : MonoBehaviour
         List<PartData> wheels = PartDatabase.singleton.parts.FindAll(x => x.GetType().Equals(typeof(WheelData)));
         dat.wheels = wheels[Random.Range(0, wheels.Count)] as WheelData;
 
-        List<PartData> misc = PartDatabase.singleton.parts.FindAll(x => x.GetType() != typeof(ChassisData) && x.GetType() != typeof(WheelData));
+        List<PartData> weapons = PartDatabase.singleton.parts.FindAll(x => x.GetType().Equals(typeof(WeaponData)));
+        dat.weapon = weapons[Random.Range(0, weapons.Count)] as WeaponData;
+
+        List<PartData> motors = PartDatabase.singleton.parts.FindAll(x => x.GetType().Equals(typeof(MotorData)));
+        dat.motor = motors[Random.Range(0, motors.Count)] as MotorData;
+
+        List<PartData> mantles = PartDatabase.singleton.parts.FindAll(x => x.GetType().Equals(typeof(MantleData)));
+        dat.mantle = mantles[Random.Range(0, mantles.Count)] as MantleData;
+
+        /*List<PartData> misc = PartDatabase.singleton.parts.FindAll(x => x.GetType() != typeof(ChassisData) && x.GetType() != typeof(WheelData));
         dat.attachements = new List<PartData>();
-        dat.attachements.Add(misc[Random.Range(0,misc.Count)]);
+        dat.attachements.Add(misc[Random.Range(0,misc.Count)]);*/
 
 
         myBotData = dat;
@@ -72,7 +81,9 @@ public class BotConfiguator : MonoBehaviour
         var script = newBot.AddComponent<Bot>();
         script.wheels = InstantiateFromPart(bot.wheels,newBot.transform);
         script.chassis = InstantiateFromPart(bot.chassis, script.wheels.transform);
-        script.weapon = InstantiateFromPart(bot.attachements[0], script.chassis.transform);
+        script.weapon = InstantiateFromPart(bot.weapon, script.chassis.transform);
+        script.motor = InstantiateFromPart(bot.motor, script.weapon.transform);
+        script.mantle = InstantiateFromPart(bot.mantle, script.chassis.transform);
 
         return newBot;
     }
@@ -131,7 +142,9 @@ public class BotConfiguator : MonoBehaviour
             Debug.Log("[CreateBotRequest] " + _fields.name);
             Debug.Log("[CreateBotRequest] wheelsint: " + _fields.wheels);
             Debug.Log("[CreateBotRequest] cahssisint: " + _fields.chassis);
-            Debug.Log("[CreateBotRequest] attachments string: " + _fields.attachments);
+            Debug.Log("[CreateBotRequest] weaponint: " + _fields.weapon);
+            Debug.Log("[CreateBotRequest] motorint: " + _fields.motor);
+            Debug.Log("[CreateBotRequest] mantleint: " + _fields.mantle);
 
             type = "put-data";
 
@@ -150,7 +163,9 @@ public class BotConfiguator : MonoBehaviour
         public string name = "";
         public int wheels;
         public int chassis;
-        public string attachments;
+        public int weapon;
+        public int motor;
+        public int mantle;
 
         public NewBot(BotData botData=null)
         {
@@ -164,13 +179,21 @@ public class BotConfiguator : MonoBehaviour
             wheels = PartDatabase.singleton.parts.FindIndex( x=>x == botData.wheels);
             Debug.Log("[NewBot] Trying to find " + botData.chassis.name + " Found at: " + PartDatabase.singleton.parts.FindIndex(x => x == botData.chassis));
             chassis = PartDatabase.singleton.parts.FindIndex(x => x == botData.chassis);
-            List<int> attachmentsInt = new List<int>();
+
+            Debug.Log("[NewBot] Trying to find " + botData.weapon.name + " Found at: " + PartDatabase.singleton.parts.FindIndex(x => x == botData.weapon));
+            weapon = PartDatabase.singleton.parts.FindIndex(x => x == botData.weapon);
+            Debug.Log("[NewBot] Trying to find " + botData.motor.name + " Found at: " + PartDatabase.singleton.parts.FindIndex(x => x == botData.motor));
+            motor = PartDatabase.singleton.parts.FindIndex(x => x == botData.motor);
+            Debug.Log("[NewBot] Trying to find " + botData.mantle.name + " Found at: " + PartDatabase.singleton.parts.FindIndex(x => x == botData.mantle));
+            mantle = PartDatabase.singleton.parts.FindIndex(x => x == botData.mantle);
+
+            /*List<int> attachmentsInt = new List<int>();
             foreach(var part in botData.attachements)
             {
                 attachmentsInt.Add(PartDatabase.singleton.parts.FindIndex(x => x == part));
             }
 
-            attachments = System.Convert.ToBase64String(System.Text.Encoding.UTF8.GetBytes(JsonConvert.SerializeObject(attachmentsInt)));
+            attachments = System.Convert.ToBase64String(System.Text.Encoding.UTF8.GetBytes(JsonConvert.SerializeObject(attachmentsInt)));*/
             //attachments = "TODO";
 
         }
