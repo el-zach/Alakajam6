@@ -12,7 +12,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 6e08127c86fb8d54a985202b11f848eb, type: 3}
   m_Name: FirstBot 3
   m_EditorClassIdentifier: 
-  botName: RobertBot
+  botName: Johnny The Cowboy
   wheels: {fileID: 11400000, guid: 63d6c23bd19f9d54f9000f191945bbd3, type: 2}
   weapon: {fileID: 11400000, guid: f7cf2ec9201c42240ba1febd5337f006, type: 2}
   chassis: {fileID: 11400000, guid: 1dee13e035d0e6846917ee1f9153b3ff, type: 2}

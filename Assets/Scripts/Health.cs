@@ -6,6 +6,7 @@ using UnityEngine.Events;
 public class Health : MonoBehaviour
 {
     public float maxHealth=12f;
+    public Bot bot;
 
     [Header("Runtime")]
     public float currentHealth;
@@ -14,6 +15,7 @@ public class Health : MonoBehaviour
     private void Start()
     {
         currentHealth = maxHealth;
+        bot = GetComponent<Bot>();
     }
 
     public void Damage(float _damage)
@@ -23,6 +25,8 @@ public class Health : MonoBehaviour
         {
             Death();
         }
+
+        
         OnDamage.Invoke();
     }
 
@@ -48,7 +52,11 @@ public class Health : MonoBehaviour
         {
             if (contact.otherCollider.attachedRigidbody?.CompareTag("Bullet")??false)
             {
-                Damage(contact.otherCollider.attachedRigidbody.GetComponent<Bullet>().data.damage);
+                Bullet bulletScript = contact.otherCollider.attachedRigidbody.GetComponent<Bullet>();
+                Damage(bulletScript.data.damage);
+                bot.toExclude.Add(contact.otherCollider);
+                bulletScript.OnBulletDespawn.AddListener(bot.DeRegisterBulletCollider);
+
                 //Debug.Log(gameObject.name + " was dealt damage by " + contact.otherCollider.attachedRigidbody.gameObject.name);
             }
         }

@@ -5,16 +5,32 @@ using UnityEngine;
 public class PlayerInput : MonoBehaviour
 {
     public Bot bot;
+    public BotBrain brain;
 
     private void Start()
     {
         bot = GetComponent<Bot>();
+        brain = GetComponent<BotBrain>();
+        brain.myTarget.position = transform.position;
     }
 
     // Update is called once per frame
     void Update()
     {
-        bot.movementInput = GetInput();
+        //bot.movementInput = GetInput();
+        UpdateBrainTarget();
+    }
+
+    void UpdateBrainTarget()
+    {
+        if (Input.GetMouseButtonDown(0))
+        {
+            RaycastHit hit;
+            if(Physics.Raycast(Camera.main.ScreenPointToRay(Input.mousePosition), out hit))
+            {
+                brain.myTarget.position = hit.point;
+            }
+        }
     }
 
     Vector3 GetInput()

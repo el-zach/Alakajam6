@@ -10,4 +10,5 @@ public class BulletData : ScriptableObject {
     public float colliderSize = 0.2f;
     public Mesh graphic;
     public Material material;
+    public bool useGravity = false;
 }
