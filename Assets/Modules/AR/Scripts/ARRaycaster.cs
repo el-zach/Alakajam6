@@ -64,6 +64,8 @@ public class ARRaycaster : MonoBehaviour
         }
     }
 
+    public float scaleFactor = 1f;
+
     Transform lastPlaced;
     void Spawn(Vector3 relativePos, Quaternion relativeRot)
     {
@@ -73,6 +75,7 @@ public class ARRaycaster : MonoBehaviour
             var newT = Instantiate<Transform>(r, rig.GetComponent<ARSessionOrigin>().trackablesParent);
             newT.localPosition = relativePos;
             newT.localRotation = relativeRot * Quaternion.Euler(0,180,0);
+            newT.localScale = scaleFactor * Vector3.one;
             lastPlaced = newT;
         }
     }
