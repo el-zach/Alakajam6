@@ -8,4 +8,6 @@ public class BulletData : ScriptableObject {
     public float damage = 1f;
     public float lifeTime = 1.5f;
     public float colliderSize = 0.2f;
+    public Mesh graphic;
+    public Material material;
 }

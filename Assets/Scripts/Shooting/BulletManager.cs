@@ -38,7 +38,9 @@ public class BulletManager : MonoBehaviour
 
     void SetupBullet(GameObject _bulletObject,BulletData _bullet, GameObject _owner)
     {
-        _bulletObject.GetComponent<Bullet>().data = _bullet;
+        var bulletScript = _bulletObject.GetComponent<Bullet>();
+        bulletScript.data = _bullet;
+        bulletScript.SetMeUp();
         //LayerMask.NameToLayer("PlayerBullets")
 
         Collider coll = _owner.GetComponent<Collider>(); //_owner.GetComponentInParent<Collider>();

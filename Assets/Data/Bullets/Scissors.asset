@@ -10,9 +10,12 @@ MonoBehaviour:
   m_Enabled: 1
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: 44e4f45ad70d5f746ab854ea6a953270, type: 3}
-  m_Name: Regular
+  m_Name: Scissors
   m_EditorClassIdentifier: 
-  speed: 25
+  speed: 40
   damage: 1
   lifeTime: 1.5
-  colliderSize: 0.2
+  colliderSize: 1.5
+  graphic: {fileID: -3975482339634711942, guid: 9bfcbcc522342594eb0c00cbab5264da,
+    type: 3}
+  material: {fileID: 2100000, guid: 7461b786899967a4db7c8eede1150bdd, type: 2}
