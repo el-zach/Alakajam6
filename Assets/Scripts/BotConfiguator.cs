@@ -150,6 +150,37 @@ public class BotConfiguator : MonoBehaviour
         activeBot = GenerateBotFromData(dat,generateBotWithPlayerInput, generatePreviewBot,transform);
     }
 
+    public void ColorizeRandom()
+    {
+        if(activeBot)
+        {
+            var bot = activeBot.GetComponent<Bot>();
+
+            var s = Random.Range(0.1f, 0.5f);
+            var r = Random.Range(s, 1 - s);
+
+            var saturationMin = 0.2f;
+            var saturationMax = 0.6f;
+
+            SetColor(bot.wheels, Random.ColorHSV(r - s, r + s, saturationMin, saturationMax));
+            SetColor(bot.chassis, Random.ColorHSV(r - s, r + s, saturationMin, saturationMax));
+            SetColor(bot.weapon, Random.ColorHSV(r - s, r + s, saturationMin, saturationMax));
+            SetColor(bot.motor, Random.ColorHSV(r - s, r + s, saturationMin, saturationMax));
+            SetColor(bot.mantle, Random.ColorHSV(r - s, r + s, saturationMin, saturationMax));
+        }
+    }
+
+    void SetColor(GameObject go, Color c)
+    {
+        var prop = new MaterialPropertyBlock();
+        prop.SetColor("_BaseColor", c);
+        var rs = go.GetComponentsInChildren<MeshRenderer>();
+        foreach(var r in rs)
+        {
+            r.SetPropertyBlock(prop);
+        }
+    }
+
     public static GameObject GenerateBotFromData(BotData bot, bool _playerInput, bool generatePreview, Transform spawnContainer = null)
     {
         //GameObject newBot = new GameObject();
@@ -176,6 +207,7 @@ public class BotConfiguator : MonoBehaviour
             newBot.GetComponentInChildren<HealthBar>().nameText.text = bot.botName;
         }
         var script = newBot.AddComponent<Bot>();
+
         script.data = bot;
         script.wheels = InstantiateFromPart(bot.wheels, script, newBot.transform);
         script.chassis = InstantiateFromPart(bot.chassis, script, script.wheels.transform);
