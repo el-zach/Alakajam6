@@ -12,7 +12,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 6e08127c86fb8d54a985202b11f848eb, type: 3}
   m_Name: FirstBot 1
   m_EditorClassIdentifier: 
-  botName: RobertBot
+  botName: Nono
   wheels: {fileID: 11400000, guid: 391ff03c8ecdd7b4581df1e45409deae, type: 2}
   weapon: {fileID: 11400000, guid: e1d545362a83fa448a97ff46f1d0f9d8, type: 2}
   chassis: {fileID: 11400000, guid: a1971c850310c3846b320a21a71d78b9, type: 2}

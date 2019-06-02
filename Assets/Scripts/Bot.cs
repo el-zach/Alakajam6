@@ -73,6 +73,8 @@ public class Bot : MonoBehaviour
         salveCooldown *= data.chassis.salveCooldownBonus;
 
         shots = salveCount;
+        currentSalveCooldown = Random.Range(0f, salveCooldown);
+        currentSpurtCooldown = Random.Range(0f, spurtCooldown);
     }
 
     private void Update()
@@ -156,6 +158,11 @@ public class Bot : MonoBehaviour
 
         rigid.MovePosition(rigid.position + direction * velocity);
         rigid.MoveRotation(Quaternion.Lerp(startRotation,targetRotation,2f*currentSpurt/spurtDuration));
+    }
+
+    public void DeRegisterBulletCollider(Bullet bullet)
+    {
+        toExclude.Remove(bullet.myCollider);
     }
 
 

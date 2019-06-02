@@ -1,18 +1,24 @@
 ﻿using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.Events;
 
 public class Bullet : MonoBehaviour
 {
+    public class Event : UnityEvent<Bullet> { }
+
     public BulletData data;
     public Bot myOwner;
-    SphereCollider myCollider;
+    public SphereCollider myCollider;
+
+    public Event OnBulletDespawn = new Event();
 
     // Start is called before the first frame update
     private void OnEnable()
     {
         //yield return null;
         Rigidbody rigid = GetComponent<Rigidbody>();
+        rigid.useGravity = data.useGravity;
         rigid.velocity = Vector3.zero;
         rigid.angularVelocity = Vector3.zero;
         rigid.AddForce(transform.forward * data.speed, ForceMode.VelocityChange);
@@ -43,6 +49,7 @@ public class Bullet : MonoBehaviour
         yield return new WaitForSeconds(_time);
         //Destroy(this.gameObject);
         myOwner.toExclude.Remove(myCollider);
+        OnBulletDespawn.Invoke(this);
         gameObject.SetActive(false);
     }
 
