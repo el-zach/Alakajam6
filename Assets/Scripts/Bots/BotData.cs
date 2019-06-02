@@ -12,5 +12,6 @@ public class BotData : ScriptableObject {
     public ChassisData chassis;
     public MotorData motor;
     public MantleData mantle;
-
+    [Header("Dynamic")]
+    public int killCount;
 }

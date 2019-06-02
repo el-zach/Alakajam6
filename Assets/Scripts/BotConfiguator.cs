@@ -179,7 +179,41 @@ public class BotConfiguator : MonoBehaviour
         }
 
     }
-    
+
+    public class UpdateBotRequest
+    {
+        public string type = "update-data";
+        public string db = "beyblade";
+        public string table = "botsNEW";
+        public int id;
+        public NewBot fields;
+
+        public UpdateBotRequest(int _id, NewBot _fields = null)
+        {
+            Debug.Log("[UpdateBotRequest] " + _fields.name);
+            Debug.Log("[UpdateBotRequest] wheelsint: " + _fields.wheels);
+            Debug.Log("[UpdateBotRequest] cahssisint: " + _fields.chassis);
+            Debug.Log("[UpdateBotRequest] weaponint: " + _fields.weapon);
+            Debug.Log("[UpdateBotRequest] motorint: " + _fields.motor);
+            Debug.Log("[UpdateBotRequest] mantleint: " + _fields.mantle);
+
+            type = "update-data";
+
+            db = "beyblade";
+
+            table = "botsNEW";
+
+            id = _id;
+
+            fields = _fields;
+        }
+
+    }
+
+    //create table request
+    // + string createtable
+    // + gleiche variablen (wie in der json) als public
+
     [System.Serializable]
     public class NewBot
     {
@@ -189,6 +223,7 @@ public class BotConfiguator : MonoBehaviour
         public int weapon;
         public int motor;
         public int mantle;
+        public int killCount=0;
 
         public NewBot(BotData botData=null)
         {
@@ -209,6 +244,8 @@ public class BotConfiguator : MonoBehaviour
             motor = PartDatabase.singleton.parts.FindIndex(x => x == botData.motor);
             Debug.Log("[NewBot] Trying to find " + botData.mantle.name + " Found at: " + PartDatabase.singleton.parts.FindIndex(x => x == botData.mantle));
             mantle = PartDatabase.singleton.parts.FindIndex(x => x == botData.mantle);
+
+            killCount = botData.killCount;
 
             /*List<int> attachmentsInt = new List<int>();
             foreach(var part in botData.attachements)
