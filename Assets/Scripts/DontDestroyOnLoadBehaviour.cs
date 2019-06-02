@@ -9,4 +9,9 @@ public class DontDestroyOnLoadBehaviour : MonoBehaviour
     {
         DontDestroyOnLoad(gameObject);
     }
+
+    public void LoadSceneAt(int i)
+    {
+        SceneManager.LoadScene(i);
+    }
 }

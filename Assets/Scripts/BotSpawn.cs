@@ -7,6 +7,7 @@ public class BotSpawn : MonoBehaviour
 
     public BotData botData;
     public bool playerBot = false;
+    public GameObject enableOnDeath;
 
     public void SpawnBot()
     {
@@ -15,8 +16,17 @@ public class BotSpawn : MonoBehaviour
         {
             botData = BotConfiguator.singleton.possibleBots[Random.Range(0, BotConfiguator.singleton.possibleBots.Count)];
         }
-        if(botData)
-            BotConfiguator.GenerateBotFromData(botData, playerBot, transform);
+        if (botData)
+        {
+            var newBot = BotConfiguator.GenerateBotFromData(botData, playerBot, false, transform);
+            if(enableOnDeath)
+                newBot.GetComponent<Health>().OnDeath.AddListener(EnableOnDeath);
+        }
+    }
+
+    void EnableOnDeath(Bot deadbot)
+    {
+        enableOnDeath.SetActive(true);
     }
 
     // Start is called before the first frame update

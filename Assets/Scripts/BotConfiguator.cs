@@ -19,12 +19,14 @@ public class BotConfiguator : MonoBehaviour
     public GameObject botPrefab;
 
     public BotData myBotData;
+    public BotData playerBotData;
 
     public GameObject activeBot;
 
     public BotList botList;
 
     public bool generateBotWithPlayerInput = false;
+    public bool generatePreviewBot = false;
 
     public GameObject playerSelectionRing;
 
@@ -96,7 +98,10 @@ public class BotConfiguator : MonoBehaviour
     public UnityEngine.UI.InputField nameField;
     public void NameBot()
     {
+        if (!nameField)
+            nameField = FindObjectOfType<UnityEngine.UI.InputField>();
         NameBot(nameField.text);
+        nameField = null;
     }
 
     public void NameBot(string _newName)
@@ -131,21 +136,32 @@ public class BotConfiguator : MonoBehaviour
 
 
         myBotData = dat;
-        activeBot = GenerateBotFromData(dat,generateBotWithPlayerInput,transform);
+        activeBot = GenerateBotFromData(dat,generateBotWithPlayerInput, generatePreviewBot,transform);
     }
 
-    public static GameObject GenerateBotFromData(BotData bot, bool _playerInput, Transform spawnContainer = null)
+    public static GameObject GenerateBotFromData(BotData bot, bool _playerInput, bool generatePreview, Transform spawnContainer = null)
     {
         //GameObject newBot = new GameObject();
         GameObject newBot = Instantiate(singleton.botPrefab);
         newBot.name = bot.botName;
         if(spawnContainer)
             newBot.transform.position = spawnContainer.position;
-        var brain = newBot.AddComponent<BotBrain>();
+
         var bCol = newBot.AddComponent<BoxCollider>();
         bCol.center = Vector3.up;
-        bCol.size = new Vector3(2.5f,2f,2.5f);
-        newBot.AddComponent<Rigidbody>();
+        bCol.size = new Vector3(2.5f, 2f, 2.5f);
+        if (!generatePreview)
+        {
+            var brain = newBot.AddComponent<BotBrain>();
+            
+            newBot.AddComponent<Rigidbody>();
+            if (_playerInput)
+            {
+                newBot.AddComponent<PlayerInput>();
+                brain.useBrain = false;
+            }
+            newBot.GetComponentInChildren<HealthBar>().nameText.text = bot.botName;
+        }
         var script = newBot.AddComponent<Bot>();
         script.data = bot;
         script.wheels = InstantiateFromPart(bot.wheels, script, newBot.transform);
@@ -154,13 +170,6 @@ public class BotConfiguator : MonoBehaviour
         script.motor = InstantiateFromPart(bot.motor, script, script.weapon.transform);
         script.mantle = InstantiateFromPart(bot.mantle, script, script.chassis.transform);
 
-        newBot.GetComponentInChildren<HealthBar>().nameText.text = bot.botName;
-
-        if (_playerInput)
-        {
-            newBot.AddComponent<PlayerInput>();
-            brain.useBrain = false;
-        }
 
         return newBot;
     }
@@ -212,6 +221,14 @@ public class BotConfiguator : MonoBehaviour
     {
         if(!stillWaiting)
             SendBotToCloud(myBotData);
+
+        playerBotData.botName = myBotData.botName;
+        playerBotData.chassis = myBotData.chassis;
+        playerBotData.motor = myBotData.motor;
+        playerBotData.mantle = myBotData.mantle;
+        playerBotData.weapon = myBotData.weapon;
+        playerBotData.wheels = myBotData.wheels;
+        
     }
 
     public void SendBotToCloud(BotData botData)

@@ -43,7 +43,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 1ceff3ba1836d8e4bb044a6c33b3de8d, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  botData: {fileID: 11400000, guid: 9367f267911db1246962ed859e3f4b76, type: 2}
+  botData: {fileID: 11400000, guid: e960da4e57997894caeeae4108bf9f3c, type: 2}
   playerBot: 1
 --- !u!1 &5323160909357705246
 GameObject:

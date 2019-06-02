@@ -231,11 +231,13 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   botPrefab: {fileID: 1693008957175471387, guid: 1e4192bad05cd7b4c9cb58b9667516c7,
     type: 3}
-  myBotData: {fileID: 11400000, guid: d2e2bf08b74050943b627d6a922086d6, type: 2}
+  myBotData: {fileID: 11400000, guid: 9367f267911db1246962ed859e3f4b76, type: 2}
+  playerBotData: {fileID: 11400000, guid: e960da4e57997894caeeae4108bf9f3c, type: 2}
   activeBot: {fileID: 0}
   botList:
     fields: []
   generateBotWithPlayerInput: 1
+  generatePreviewBot: 1
   playerSelectionRing: {fileID: 7046533985383403677, guid: 751d4b8ea4b62c44b8595b93b4da6720,
     type: 3}
   nameField: {fileID: 0}
