@@ -16,7 +16,7 @@ public class BotConfiguator : MonoBehaviour
 
     private void Start()
     {
-        activeBot = GenerateBotFromData(myBotData,generateBotWithPlayerInput,transform);
+        //activeBot = GenerateBotFromData(myBotData,generateBotWithPlayerInput,transform);
     }
 
     private void Update()
