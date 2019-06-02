@@ -13,6 +13,8 @@ public class BotConfiguator : MonoBehaviour
             singleton = this;
         else
             Debug.LogError("Too many Bot Configurators", gameObject);
+
+        //GetAllBots();
     }
     public GameObject botPrefab;
 
@@ -29,6 +31,7 @@ public class BotConfiguator : MonoBehaviour
     private void Start()
     {
         //activeBot = GenerateBotFromData(myBotData,generateBotWithPlayerInput,transform);
+        GetAllBots();
     }
 
     private void Update()
@@ -53,6 +56,7 @@ public class BotConfiguator : MonoBehaviour
             botList = JsonConvert.DeserializeObject<BotList>(GameSync.instance.results["Get Bots"]);
             //NumberOfActiveUsers = userList.fields.Length;
             GameSync.instance.results.Remove("Get Bots");
+            GetBotsFromFields();
         }
     }
 
@@ -176,10 +180,32 @@ public class BotConfiguator : MonoBehaviour
         return clone;
     }
 
-    /*public BotData DataFromJSON(string json)
-    {
+    public List<BotData> possibleBots;
 
-    }*/
+    public void GetBotsFromFields()
+    {
+        possibleBots = new List<BotData>();
+
+        foreach(var bot in botList.fields)
+        {
+            possibleBots.Add(BotFromString(bot));
+        }
+
+    }
+
+    public BotData BotFromString(BotWithID stringBot)
+    {
+        BotData newBot = ScriptableObject.CreateInstance<BotData>();
+        newBot.botName = stringBot.name;
+        newBot.wheels = PartDatabase.singleton.parts[stringBot.wheels]as WheelData;
+        newBot.chassis = PartDatabase.singleton.parts[stringBot.chassis] as ChassisData;
+        newBot.weapon = PartDatabase.singleton.parts[stringBot.weapon] as WeaponData;
+        newBot.motor = PartDatabase.singleton.parts[stringBot.motor] as MotorData;
+        newBot.mantle = PartDatabase.singleton.parts[stringBot.mantle] as MantleData;
+        newBot.killCount = stringBot.killCount;
+
+        return newBot;
+    }
 
     public bool stillWaiting = false;
     public void SendActiveBot()

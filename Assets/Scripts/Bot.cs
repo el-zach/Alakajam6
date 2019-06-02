@@ -73,6 +73,8 @@ public class Bot : MonoBehaviour
         salveCooldown *= data.chassis.salveCooldownBonus;
 
         shots = salveCount;
+        currentSalveCooldown = Random.Range(0f, salveCooldown);
+        currentSpurtCooldown = Random.Range(0f, spurtCooldown);
     }
 
     private void Update()

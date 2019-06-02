@@ -7,24 +7,32 @@ public class MultiPlayerCam : MonoBehaviour
 
     public List<Transform> keepInFrame;
     public Vector3 offset;
+    public bool isReady = false;
 
     // Start is called before the first frame update
     void Start()
     {
-        GetAllTargets();
+        StartCoroutine(WaitToDoStart(0.5f));
         offset = transform.position;
     }
 
     // Update is called once per frame
     void Update()
     {
-        if (keepInFrame.Count == 0)
+        if (keepInFrame.Count == 0 && isReady)
         {
             GetAllTargets();
         }
 
-        transform.position = GetCenterPoint() + offset;
+        if(isReady)
+            transform.position = GetCenterPoint() + offset;
+    }
 
+    IEnumerator WaitToDoStart(float _time)
+    {
+        yield return new WaitForSeconds(_time);
+        GetAllTargets();
+        isReady = true;
     }
 
     public Vector3 GetCenterPoint()

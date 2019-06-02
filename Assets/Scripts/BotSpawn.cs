@@ -10,7 +10,13 @@ public class BotSpawn : MonoBehaviour
 
     public void SpawnBot()
     {
-        BotConfiguator.GenerateBotFromData(botData, playerBot, transform);
+
+        if (botData == null && BotConfiguator.singleton.possibleBots.Count>0)
+        {
+            botData = BotConfiguator.singleton.possibleBots[Random.Range(0, BotConfiguator.singleton.possibleBots.Count)];
+        }
+        if(botData)
+            BotConfiguator.GenerateBotFromData(botData, playerBot, transform);
     }
 
     // Start is called before the first frame update
@@ -22,6 +28,7 @@ public class BotSpawn : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
-        
+        if (!botData)
+            SpawnBot();
     }
 }
