@@ -12,9 +12,9 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 44e4f45ad70d5f746ab854ea6a953270, type: 3}
   m_Name: Plane
   m_EditorClassIdentifier: 
-  speed: 5
+  speed: 9
   damage: 1
-  lifeTime: 1.5
+  lifeTime: 6
   colliderSize: 1.5
   graphic: {fileID: 1234322512982351993, guid: 9bfcbcc522342594eb0c00cbab5264da, type: 3}
   material: {fileID: 2100000, guid: 5ec7ee0a863eb284e8418b2a5500bfa3, type: 2}

@@ -149,6 +149,10 @@ public class BotConfiguator : MonoBehaviour
         GameObject clone = Instantiate(part.prefab, parent);
         if (part.logic)
         {
+            /*Debug.Log("[BotConfiguator] this is happening");
+            var newLogic = ScriptableObject.CreateInstance<LogicData>();
+            newLogic.logicBlocks = part.logic.logicBlocks;
+            part.logic = newLogic;*/
             part.logic.Register(_bot, clone);
         }
         return clone;

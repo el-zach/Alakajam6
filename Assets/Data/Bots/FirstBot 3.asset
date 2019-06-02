@@ -1,0 +1,21 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 6e08127c86fb8d54a985202b11f848eb, type: 3}
+  m_Name: FirstBot 3
+  m_EditorClassIdentifier: 
+  botName: RobertBot
+  wheels: {fileID: 11400000, guid: 63d6c23bd19f9d54f9000f191945bbd3, type: 2}
+  weapon: {fileID: 11400000, guid: f7cf2ec9201c42240ba1febd5337f006, type: 2}
+  chassis: {fileID: 11400000, guid: a1971c850310c3846b320a21a71d78b9, type: 2}
+  motor: {fileID: 11400000, guid: b1382eb7ea53d3147b6e9dc9d02abfe9, type: 2}
+  mantle: {fileID: 11400000, guid: 4b1144a9eb77d9148afb2e9d2fa3d6da, type: 2}
+  killCount: 0

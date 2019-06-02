@@ -430,7 +430,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 0
+  m_IsActive: 1
 --- !u!4 &822348509
 Transform:
   m_ObjectHideFlags: 0
@@ -439,7 +439,7 @@ Transform:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 822348508}
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: 7.35, y: 0, z: 14.05}
+  m_LocalPosition: {x: 32.2, y: 0, z: -10.4}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children: []
   m_Father: {fileID: 1857962066}
@@ -457,7 +457,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 1ceff3ba1836d8e4bb044a6c33b3de8d, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  botData: {fileID: 11400000, guid: 9367f267911db1246962ed859e3f4b76, type: 2}
+  botData: {fileID: 11400000, guid: 4b0dc2f32612ca046a9ae68c62f2e2de, type: 2}
   playerBot: 0
 --- !u!1 &994382321
 GameObject:
@@ -1061,7 +1061,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 0
+  m_IsActive: 1
 --- !u!4 &1618087087
 Transform:
   m_ObjectHideFlags: 0
@@ -1217,7 +1217,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 0
+  m_IsActive: 1
 --- !u!4 &1706227360
 Transform:
   m_ObjectHideFlags: 0
@@ -1387,6 +1387,11 @@ PrefabInstance:
         type: 3}
       propertyPath: m_LocalEulerAnglesHint.z
       value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 5323160908478311494, guid: 9c8b2f44e5533f24a9451838b755980b,
+        type: 3}
+      propertyPath: m_IsActive
+      value: 1
       objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 9c8b2f44e5533f24a9451838b755980b, type: 3}

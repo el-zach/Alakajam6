@@ -13,7 +13,7 @@ public class LogicData : ScriptableObject
     {
         public TriggerType triggerType;
         public GameObject executeOn;
-        Bot bot;
+        public Bot bot;
 
         [Header("Rotator")]
         public bool isRotator = false;
@@ -22,25 +22,34 @@ public class LogicData : ScriptableObject
         [Header("Weapon")]
         public bool isWeapon = false;
         public BulletData bullet;
-
-
+        
 
         public void Register(Bot _bot, GameObject _toExecuteOn)
         {
+
+            var copy = new LogicBlock();
+            copy.triggerType = triggerType;
+            copy.executeOn = _toExecuteOn;
+            copy.bot = _bot;
+            copy.isRotator = isRotator;
+            copy.rotationLimit = rotationLimit;
+            copy.isWeapon = isWeapon;
+            copy.bullet = bullet;
+
             bot = _bot;
             executeOn = _toExecuteOn;
 
             if (triggerType == TriggerType.Update)
             {
-                _bot.OnUpdate.AddListener(Execute);
+                _bot.OnUpdate.AddListener(copy.Execute);
             }
             if (triggerType == TriggerType.Attack)
             {
-                _bot.OnAttack.AddListener(Execute);
+                _bot.OnAttack.AddListener(copy.Execute);
             }
             if (triggerType == TriggerType.Movement)
             {
-                _bot.OnMove.AddListener(Execute);
+                _bot.OnMove.AddListener(copy.Execute);
             }
         }
 
@@ -72,5 +81,11 @@ public class LogicData : ScriptableObject
         foreach (var block in logicBlocks)
             block.Register(bot,part);
     }
+
+    /*public LogicData(LogicData source)
+    {
+        logicBlocks = new List<LogicBlock>(source.logicBlocks);
+        Debug.Log("[LogicData] source:" + source.logicBlocks.Count + " mine: " + logicBlocks.Count);
+    }*/
 
 }
