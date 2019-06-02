@@ -615,7 +615,7 @@ AudioSource:
   serializedVersion: 4
   OutputAudioMixerGroup: {fileID: 0}
   m_audioClip: {fileID: 8300000, guid: 08bbd1ae0e07c654aba8564a829c3d3f, type: 3}
-  m_PlayOnAwake: 1
+  m_PlayOnAwake: 0
   m_Volume: 0.05
   m_Pitch: 1
   Loop: 0
@@ -1041,6 +1041,7 @@ MonoBehaviour:
   rotationalSpeed: 60
   fireRate: 0
   salveCount: 0
+  salveCooldown: 0
   movementInput: {x: 0, y: 0, z: 0}
   aimingAt: {fileID: 0}
   health: 0
@@ -1048,7 +1049,7 @@ MonoBehaviour:
   currentSpurtCooldown: 0
   shotCooldown: 0
   shots: 0
-  salveCooldown: 0
+  currentSalveCooldown: 0
   targetRotation: {x: 0, y: 0, z: 0, w: 0}
   data: {fileID: 0}
   wheels: {fileID: 1138204830}
@@ -1216,6 +1217,7 @@ MonoBehaviour:
   activeBot: {fileID: 0}
   botList:
     fields: []
+  generateBotWithPlayerInput: 1
   nameField: {fileID: 0}
   stillWaiting: 0
 --- !u!4 &1567896892

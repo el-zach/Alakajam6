@@ -17,4 +17,7 @@ MonoBehaviour:
   attachmentPoint: {x: 0, y: 0, z: 0}
   weight: 0
   maxHealth: 0
-  logic: {fileID: 0}
+  logic: {fileID: 11400000, guid: 09d09711adadfbe4399841217655e197, type: 2}
+  fireRate: 3
+  salveCount: 5
+  salveCooldown: 1

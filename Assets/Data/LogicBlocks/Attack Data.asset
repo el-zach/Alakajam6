@@ -14,5 +14,8 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   logicBlocks:
   - triggerType: 0
-    rotation: {x: 0, y: 0, z: 0}
     executeOn: {fileID: 0}
+    isRotator: 0
+    rotationLimit: 0
+    isWeapon: 1
+    bullet: {fileID: 11400000, guid: 19be52141c76d3a48bc0f4d879d18dc3, type: 2}
