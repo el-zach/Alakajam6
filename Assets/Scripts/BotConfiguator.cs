@@ -11,8 +11,10 @@ public class BotConfiguator : MonoBehaviour
     {
         if (singleton == null)
             singleton = this;
-        else
-            Debug.LogError("Too many Bot Configurators", gameObject);
+        else { 
+            Debug.LogWarning("Too many Bot Configurators", gameObject);
+            Destroy(gameObject);
+        }
 
         //GetAllBots();
     }
