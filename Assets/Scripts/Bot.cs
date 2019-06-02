@@ -18,8 +18,9 @@ public class Bot : MonoBehaviour
 
     public float rotationalSpeed=1f;
 
-    public float fireRate;
-    public int salveCount;
+    public float fireRate=3f;
+    public int salveCount=5;
+    public float salveCooldown = 2f;
 
     [Header("Runtime Properties")]
     public Vector3 movementInput;
@@ -31,7 +32,7 @@ public class Bot : MonoBehaviour
 
     public float shotCooldown;
     public int shots;
-    public float salveCooldown;
+    public float currentSalveCooldown;
 
     Quaternion startRotation;
     public Quaternion targetRotation;
@@ -58,9 +59,18 @@ public class Bot : MonoBehaviour
         currentSpurt = spurtDuration;
         spurtCooldown = data.wheels.spurtCooldown;
 
+        //-----weapon------//
+        fireRate = data.weapon.fireRate;
+        salveCount = data.weapon.salveCount;
+        salveCooldown = data.weapon.salveCooldown;
+
         //----chassis---//
         rotationalSpeed = data.chassis.rotationalSpeed;
+        fireRate *= data.chassis.fireRateBonus;
+        salveCount = Mathf.FloorToInt(salveCount * data.chassis.salveCountBonus);
+        salveCooldown *= data.chassis.salveCooldownBonus;
 
+        shots = salveCount;
     }
 
     private void Update()
@@ -68,6 +78,38 @@ public class Bot : MonoBehaviour
         OnUpdate.Invoke();
         Move();
         ComputeMovement();
+        Shooting();
+    }
+
+    void Shooting()
+    {
+
+        currentSalveCooldown += Time.deltaTime;
+
+        if(currentSalveCooldown >= salveCooldown)
+        {
+            if( shotCooldown >= 1f/fireRate)
+            {
+                Shot();
+                shotCooldown = 0f;
+                shots++;
+            }
+            else
+            {
+                shotCooldown += Time.deltaTime;
+            }
+            if (shots >= salveCount)
+            {
+                currentSalveCooldown = 0f;
+                shots = 0;
+            }
+        }
+    }
+
+    void Shot()
+    {
+        Debug.Log("[Bot] Shoot!",gameObject);
+        OnAttack.Invoke();
     }
 
     private void Move()

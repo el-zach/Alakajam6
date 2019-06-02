@@ -19,6 +19,11 @@ public class LogicData : ScriptableObject
         public bool isRotator = false;
         public float rotationLimit = 0f;
 
+        [Header("Weapon")]
+        public bool isWeapon = false;
+        public BulletData bullet;
+
+
 
         public void Register(Bot _bot, GameObject _toExecuteOn)
         {
@@ -50,6 +55,12 @@ public class LogicData : ScriptableObject
                     executeOn.transform.localRotation = Quaternion.Euler(Vector3.up * Mathf.Sin(Time.time * bot.rotationalSpeed) * rotationLimit);
                 }
             }
+
+            if (isWeapon)
+            {
+                BulletManager.singleton.InstantiateBullet(bullet, executeOn.transform.position + executeOn.transform.forward * 0.5f, executeOn.transform.rotation, bullet.damage,bot.gameObject);
+            }
+
         }
 
     }

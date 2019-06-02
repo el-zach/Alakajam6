@@ -12,9 +12,11 @@ public class BotConfiguator : MonoBehaviour
 
     public BotList botList;
 
+    public bool generateBotWithPlayerInput = false;
+
     private void Start()
     {
-        activeBot = GenerateBotFromData(myBotData);
+        activeBot = GenerateBotFromData(myBotData,generateBotWithPlayerInput,transform);
     }
 
     private void Update()
@@ -24,6 +26,13 @@ public class BotConfiguator : MonoBehaviour
         {
 
             GameSync.instance.results.Remove("Send Bot To Cloud");
+            stillWaiting = false;
+        }
+
+        if (GameSync.instance.results.ContainsKey("Update Bot In Cloud"))
+        {
+
+            GameSync.instance.results.Remove("Update Bot In Cloud");
             stillWaiting = false;
         }
 
@@ -43,6 +52,30 @@ public class BotConfiguator : MonoBehaviour
             parameters: new string[] { "type=get-all", "from=alakajamBots", "db=beyblade" }
         );
     }
+
+    [ContextMenu("Update Bot Data at [1]")]
+    public void TestUpdate()
+    {
+        BotData botData = myBotData;
+        Debug.Log(botData.botName);
+        stillWaiting = true;
+        if (!botData)
+        {
+            Debug.LogError("[SendBotToCLoud] Suddenly botdata went missing");
+            return;
+        }
+        UpdateBotRequest req = new UpdateBotRequest(1,_fields: new NewBot(botData));
+        if (req != null)
+        {
+            Debug.Log("[SendActiveBot] req is not null <b>:></b>");
+            GameSync.instance.SendData(req, "Update Bot In Cloud");
+        }
+        else
+        {
+            Debug.LogWarning("req is null <b>:></b>");
+        }
+    }
+
 
     public UnityEngine.UI.InputField nameField;
     public void NameBot()
@@ -82,14 +115,15 @@ public class BotConfiguator : MonoBehaviour
 
 
         myBotData = dat;
-        activeBot = GenerateBotFromData(dat);
+        activeBot = GenerateBotFromData(dat,generateBotWithPlayerInput,transform);
     }
 
-    public GameObject GenerateBotFromData(BotData bot)
+    public static GameObject GenerateBotFromData(BotData bot, bool _playerInput, Transform spawnContainer = null)
     {
         GameObject newBot = new GameObject();
         newBot.name = bot.botName;
-        newBot.transform.position = transform.position;
+        if(spawnContainer)
+            newBot.transform.position = spawnContainer.position;
         newBot.AddComponent<BotBrain>();
         var bCol = newBot.AddComponent<BoxCollider>();
         bCol.center = Vector3.up;
@@ -103,14 +137,15 @@ public class BotConfiguator : MonoBehaviour
         script.motor = InstantiateFromPart(bot.motor, script, script.weapon.transform);
         script.mantle = InstantiateFromPart(bot.mantle, script, script.chassis.transform);
 
-        newBot.AddComponent<PlayerInput>();
+        if(_playerInput)
+            newBot.AddComponent<PlayerInput>();
 
         return newBot;
     }
 
-    public GameObject InstantiateFromPart(PartData part, Bot _bot, Transform attachedTo = null)
+    public static GameObject InstantiateFromPart(PartData part, Bot _bot, Transform attachedTo)
     {
-        Transform parent = attachedTo ? attachedTo : transform;
+        Transform parent = attachedTo;
         GameObject clone = Instantiate(part.prefab, parent);
         if (part.logic)
         {
@@ -203,7 +238,7 @@ public class BotConfiguator : MonoBehaviour
 
             db = "beyblade";
 
-            table = "botsNEW";
+            table = "alakajamBots";
 
             id = _id;
 
