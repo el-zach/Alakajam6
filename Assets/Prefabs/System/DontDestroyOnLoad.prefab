@@ -235,6 +235,8 @@ MonoBehaviour:
   botList:
     fields: []
   generateBotWithPlayerInput: 1
+  playerSelectionRing: {fileID: 7046533985383403677, guid: 751d4b8ea4b62c44b8595b93b4da6720,
+    type: 3}
   nameField: {fileID: 0}
   stillWaiting: 0
 --- !u!1 &3430222446651640827
