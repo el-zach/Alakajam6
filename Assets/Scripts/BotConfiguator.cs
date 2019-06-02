@@ -60,6 +60,11 @@ public class BotConfiguator : MonoBehaviour
             GameSync.instance.results.Remove("Get Bots");
             GetBotsFromFields();
         }
+
+        if (Input.GetKeyDown(KeyCode.K))
+        {
+            GetAllBots();
+        }
     }
 
     [ContextMenu("Get Bot Data From Server")]
@@ -331,7 +336,7 @@ public class BotConfiguator : MonoBehaviour
         {
             if (botData==null)
             {
-                Debug.LogError("[NewBot] MISSING BOTDATA");
+                Debug.LogWarning("[NewBot] MISSING BOTDATA");
                 return;
             }
             name = botData.botName;
