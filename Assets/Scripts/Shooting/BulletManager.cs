@@ -14,7 +14,7 @@ public class BulletManager : MonoBehaviour
     public GameObject bulletPrefab;
     public List<GameObject> useableBullets = new List<GameObject>();
 
-    public void InstantiateBullet(BulletData _bullet, Vector3 _pos, Quaternion _rot,float _damage, GameObject _owner)
+    public void InstantiateBullet(BulletData _bullet, Vector3 _pos, Quaternion _rot,float _damage, Bot _owner)
     {
         _bullet.damage = _damage;
         if (useableBullets.Count != 0)
@@ -33,22 +33,32 @@ public class BulletManager : MonoBehaviour
             //create new Bullet
             GameObject newBullet = Instantiate(bulletPrefab, _pos, _rot, transform);
             SetupBullet(newBullet,_bullet,_owner);
+            newBullet.SetActive(true);
         }
     }
 
-    void SetupBullet(GameObject _bulletObject,BulletData _bullet, GameObject _owner)
+    void SetupBullet(GameObject _bulletObject,BulletData _bullet, Bot _owner)
     {
         var bulletScript = _bulletObject.GetComponent<Bullet>();
         bulletScript.data = _bullet;
-        bulletScript.SetMeUp();
+        bulletScript.SetMeUp(_owner);
         //LayerMask.NameToLayer("PlayerBullets")
 
+        /*
         Collider coll = _owner.GetComponent<Collider>(); //_owner.GetComponentInParent<Collider>();
         if(coll==null)
             coll = _owner.GetComponentInChildren<Collider>();
         if (coll == null)
             coll = _owner.GetComponentInParent<Collider>();
-        Physics.IgnoreCollision(_bulletObject.GetComponent<Collider>(), coll);
+        Physics.IgnoreCollision(_bulletObject.GetComponent<Collider>(), coll);*/
+
+
+        Collider myCollider = _bulletObject.GetComponent<Collider>();
+        foreach (var collider in _owner.toExclude)
+        {
+            Physics.IgnoreCollision(myCollider, collider);
+        }
+
 
         //_bulletObject.layer = _owner == Owner.Player ? 14 : _owner == Owner.Enemy ? 15 : 0;
         

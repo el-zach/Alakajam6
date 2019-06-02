@@ -42,11 +42,13 @@ public class Bot : MonoBehaviour
     public GameObject wheels, chassis, weapon, motor, mantle;
     public UnityEvent OnAttack= new UnityEvent(), OnMove = new UnityEvent(), OnUpdate = new UnityEvent();
     Rigidbody rigid;
+    public List<Collider> toExclude=new List<Collider>();
 
 
     private void Start()
     {
         rigid = GetComponent<Rigidbody>();
+        toExclude.Add(GetComponent<Collider>());
         SetupFromBotData();
     }
 

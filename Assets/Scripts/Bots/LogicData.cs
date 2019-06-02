@@ -58,7 +58,7 @@ public class LogicData : ScriptableObject
 
             if (isWeapon)
             {
-                BulletManager.singleton.InstantiateBullet(bullet, executeOn.transform.position + executeOn.transform.forward * 0.5f, executeOn.transform.rotation, bullet.damage,bot.gameObject);
+                BulletManager.singleton.InstantiateBullet(bullet, executeOn.transform.position + executeOn.transform.forward * 0.5f, executeOn.transform.rotation, bullet.damage,bot);
             }
 
         }
