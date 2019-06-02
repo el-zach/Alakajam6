@@ -40,7 +40,7 @@ public class BotConfiguator : MonoBehaviour
     {
         GameSync.instance.GetData(
             jobName: "Get Bots",
-            parameters: new string[] { "type=get-all", "from=botsNEW", "db=beyblade" }
+            parameters: new string[] { "type=get-all", "from=alakajamBots", "db=beyblade" }
         );
     }
 
@@ -157,7 +157,7 @@ public class BotConfiguator : MonoBehaviour
     {
         public string type = "put-data";
         public string db = "beyblade";
-        public string table = "botsNEW";
+        public string table = "alakajamBots";
         public NewBot fields;
 
         public CreateBotRequest(NewBot _fields=null)
@@ -168,12 +168,13 @@ public class BotConfiguator : MonoBehaviour
             Debug.Log("[CreateBotRequest] weaponint: " + _fields.weapon);
             Debug.Log("[CreateBotRequest] motorint: " + _fields.motor);
             Debug.Log("[CreateBotRequest] mantleint: " + _fields.mantle);
+            Debug.Log("[CreateBotRequest] killcountint: " + _fields.killCount);
 
             type = "put-data";
 
             db = "beyblade";
 
-            table = "botsNEW";
+            table = "alakajamBots";
 
             fields = _fields;
         }
@@ -184,7 +185,7 @@ public class BotConfiguator : MonoBehaviour
     {
         public string type = "update-data";
         public string db = "beyblade";
-        public string table = "botsNEW";
+        public string table = "alakajamBots";
         public int id;
         public NewBot fields;
 
@@ -196,6 +197,7 @@ public class BotConfiguator : MonoBehaviour
             Debug.Log("[UpdateBotRequest] weaponint: " + _fields.weapon);
             Debug.Log("[UpdateBotRequest] motorint: " + _fields.motor);
             Debug.Log("[UpdateBotRequest] mantleint: " + _fields.mantle);
+            Debug.Log("[UpdateBotRequest] killcountint: " + _fields.killCount);
 
             type = "update-data";
 
