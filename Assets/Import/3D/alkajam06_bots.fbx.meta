@@ -14,6 +14,36 @@ ModelImporter:
       assembly: UnityEngine.CoreModule
       name: No Name
     second: {fileID: 2100000, guid: 97f75623bb2376f48b3c253a8ed87bcd, type: 2}
+  - first:
+      type: UnityEngine:Material
+      assembly: UnityEngine.CoreModule
+      name: bullet
+    second: {fileID: 2100000, guid: c0751fd96c3b89a48b61f774f67693de, type: 2}
+  - first:
+      type: UnityEngine:Material
+      assembly: UnityEngine.CoreModule
+      name: chassis
+    second: {fileID: 2100000, guid: ea556a13c337bca44906820f75c00409, type: 2}
+  - first:
+      type: UnityEngine:Material
+      assembly: UnityEngine.CoreModule
+      name: mantle
+    second: {fileID: 2100000, guid: 902ae7f92019e944b8f7a3d86a9a5761, type: 2}
+  - first:
+      type: UnityEngine:Material
+      assembly: UnityEngine.CoreModule
+      name: motor
+    second: {fileID: 2100000, guid: be8f085bc571ee747ac422f5af96e2f5, type: 2}
+  - first:
+      type: UnityEngine:Material
+      assembly: UnityEngine.CoreModule
+      name: weapon
+    second: {fileID: 2100000, guid: af5f6597b66590046ad18ce26869d25c, type: 2}
+  - first:
+      type: UnityEngine:Material
+      assembly: UnityEngine.CoreModule
+      name: wheels
+    second: {fileID: 2100000, guid: e07f3f2be7ea37e4fa05e0cb2e4ad936, type: 2}
   materials:
     importMaterials: 1
     materialName: 0
