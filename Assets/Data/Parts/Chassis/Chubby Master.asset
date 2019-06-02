@@ -18,4 +18,4 @@ MonoBehaviour:
   weight: 2
   maxHealth: 15
   logic: {fileID: 11400000, guid: 142543f0d2d00a148bd5fc8f75cb1c23, type: 2}
-  rotationalSpeed: 30
+  rotationalSpeed: 60

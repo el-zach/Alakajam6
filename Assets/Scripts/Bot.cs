@@ -58,6 +58,9 @@ public class Bot : MonoBehaviour
         currentSpurt = spurtDuration;
         spurtCooldown = data.wheels.spurtCooldown;
 
+        //----chassis---//
+        rotationalSpeed = data.chassis.rotationalSpeed;
+
     }
 
     private void Update()
