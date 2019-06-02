@@ -40,7 +40,7 @@ public class BotConfiguator : MonoBehaviour
     {
         GameSync.instance.GetData(
             jobName: "Get Bots",
-            parameters: new string[] { "type=get-all", "from=botsNEW", "db=beyblade" }
+            parameters: new string[] { "type=get-all", "from=alakajamBots", "db=beyblade" }
         );
     }
 
@@ -157,7 +157,7 @@ public class BotConfiguator : MonoBehaviour
     {
         public string type = "put-data";
         public string db = "beyblade";
-        public string table = "botsNEW";
+        public string table = "alakajamBots";
         public NewBot fields;
 
         public CreateBotRequest(NewBot _fields=null)
@@ -168,18 +168,54 @@ public class BotConfiguator : MonoBehaviour
             Debug.Log("[CreateBotRequest] weaponint: " + _fields.weapon);
             Debug.Log("[CreateBotRequest] motorint: " + _fields.motor);
             Debug.Log("[CreateBotRequest] mantleint: " + _fields.mantle);
+            Debug.Log("[CreateBotRequest] killcountint: " + _fields.killCount);
 
             type = "put-data";
 
             db = "beyblade";
 
-            table = "botsNEW";
+            table = "alakajamBots";
 
             fields = _fields;
         }
 
     }
-    
+
+    public class UpdateBotRequest
+    {
+        public string type = "update-data";
+        public string db = "beyblade";
+        public string table = "alakajamBots";
+        public int id;
+        public NewBot fields;
+
+        public UpdateBotRequest(int _id, NewBot _fields = null)
+        {
+            Debug.Log("[UpdateBotRequest] " + _fields.name);
+            Debug.Log("[UpdateBotRequest] wheelsint: " + _fields.wheels);
+            Debug.Log("[UpdateBotRequest] cahssisint: " + _fields.chassis);
+            Debug.Log("[UpdateBotRequest] weaponint: " + _fields.weapon);
+            Debug.Log("[UpdateBotRequest] motorint: " + _fields.motor);
+            Debug.Log("[UpdateBotRequest] mantleint: " + _fields.mantle);
+            Debug.Log("[UpdateBotRequest] killcountint: " + _fields.killCount);
+
+            type = "update-data";
+
+            db = "beyblade";
+
+            table = "botsNEW";
+
+            id = _id;
+
+            fields = _fields;
+        }
+
+    }
+
+    //create table request
+    // + string createtable
+    // + gleiche variablen (wie in der json) als public
+
     [System.Serializable]
     public class NewBot
     {
@@ -189,6 +225,7 @@ public class BotConfiguator : MonoBehaviour
         public int weapon;
         public int motor;
         public int mantle;
+        public int killCount=0;
 
         public NewBot(BotData botData=null)
         {
@@ -209,6 +246,8 @@ public class BotConfiguator : MonoBehaviour
             motor = PartDatabase.singleton.parts.FindIndex(x => x == botData.motor);
             Debug.Log("[NewBot] Trying to find " + botData.mantle.name + " Found at: " + PartDatabase.singleton.parts.FindIndex(x => x == botData.mantle));
             mantle = PartDatabase.singleton.parts.FindIndex(x => x == botData.mantle);
+
+            killCount = botData.killCount;
 
             /*List<int> attachmentsInt = new List<int>();
             foreach(var part in botData.attachements)
