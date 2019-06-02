@@ -228,6 +228,8 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: ffda5acbab69f9345952a2e093a6088e, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  botPrefab: {fileID: 1693008957175471387, guid: 1e4192bad05cd7b4c9cb58b9667516c7,
+    type: 3}
   myBotData: {fileID: 11400000, guid: d2e2bf08b74050943b627d6a922086d6, type: 2}
   activeBot: {fileID: 0}
   botList:

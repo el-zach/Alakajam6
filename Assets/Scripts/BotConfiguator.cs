@@ -6,6 +6,16 @@ using Newtonsoft.Json;
 
 public class BotConfiguator : MonoBehaviour
 {
+    public static BotConfiguator singleton;
+    private void Awake()
+    {
+        if (singleton == null)
+            singleton = this;
+        else
+            Debug.LogError("Too many Bot Configurators", gameObject);
+    }
+    public GameObject botPrefab;
+
     public BotData myBotData;
 
     public GameObject activeBot;
@@ -120,7 +130,8 @@ public class BotConfiguator : MonoBehaviour
 
     public static GameObject GenerateBotFromData(BotData bot, bool _playerInput, Transform spawnContainer = null)
     {
-        GameObject newBot = new GameObject();
+        //GameObject newBot = new GameObject();
+        GameObject newBot = Instantiate(singleton.botPrefab);
         newBot.name = bot.botName;
         if(spawnContainer)
             newBot.transform.position = spawnContainer.position;

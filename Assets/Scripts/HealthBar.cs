@@ -29,7 +29,7 @@ public class HealthBar : MonoBehaviour
     void UpdateSizeOfBar()
     {
         float size = health.maxHealth;
-        transform.localScale = new Vector3 (Remap(size, 1f, 20f, 0.0125f,3f),0.65f,1f);
+        //transform.localScale = new Vector3 (Remap(size, 1f, 20f, 0.0125f,3f),0.65f,1f);
     }
 
     public static float Remap(float value, float from1, float to1, float from2, float to2)

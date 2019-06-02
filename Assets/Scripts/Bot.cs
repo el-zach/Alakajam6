@@ -110,7 +110,7 @@ public class Bot : MonoBehaviour
 
     void Shot()
     {
-        Debug.Log("[Bot] Shoot!",gameObject);
+        //Debug.Log("[Bot] Shoot!",gameObject);
         OnAttack.Invoke();
     }
 

@@ -19,3 +19,6 @@ MonoBehaviour:
   maxHealth: 15
   logic: {fileID: 11400000, guid: 142543f0d2d00a148bd5fc8f75cb1c23, type: 2}
   rotationalSpeed: 60
+  fireRateBonus: 1
+  salveCountBonus: 1.2
+  salveCooldownBonus: 1
