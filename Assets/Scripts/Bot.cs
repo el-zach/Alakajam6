@@ -9,11 +9,11 @@ public class Bot : MonoBehaviour
     public class Event : UnityEvent<Bot> { }
 
     [Header("Stats")]
-    public float maxHealth;
-    public float weight;
-    public float speed;
-    public float spurtDuration;
-    public float spurtCooldown;
+    public float maxHealth=10f;
+    public float weight=1f;
+    public float speed=1f;
+    public float spurtDuration=1f;
+    public float spurtCooldown=0.2f;
     public float fireRate;
     public int salveCount;
 
@@ -21,6 +21,10 @@ public class Bot : MonoBehaviour
     public Vector3 movementInput;
     public Transform aimingAt;
     public float health;
+
+    public float currentSpurt;
+    public float currentSpurtCooldown;
+
     public float shotCooldown;
     public int shots;
     public float salveCooldown;
@@ -29,13 +33,55 @@ public class Bot : MonoBehaviour
     public BotData data;
     public GameObject wheels, chassis, weapon, motor, mantle;
     public UnityEvent OnAttack= new UnityEvent(), OnMove = new UnityEvent(), OnUpdate = new UnityEvent();
+    public AnimationCurve spurtCurve;
+    Rigidbody rigid;
 
 
-    
+    private void Start()
+    {
+        rigid = GetComponent<Rigidbody>();
+    }
 
     private void Update()
     {
         OnUpdate.Invoke();
+        Move();
+        ComputeMovement();
+    }
+
+    private void Move()
+    {
+        if (currentSpurtCooldown == 0f)
+        {
+            if (movementInput != Vector3.zero)
+            {
+                Turn();
+                Spurt();
+            }
+            movementInput = Vector3.zero;
+        }
+    }
+
+    void Turn()
+    {
+        rigid.MoveRotation(Quaternion.LookRotation(Vector3.Lerp(transform.forward, movementInput.normalized, 0.5f)));
+    }
+
+    void Spurt()
+    {
+        currentSpurt = 0f;
+    }
+    
+    void ComputeMovement()
+    {
+        if (currentSpurt >= spurtDuration)
+            return;
+
+        currentSpurt += Time.deltaTime;
+        Vector3 direction = transform.forward;
+        float velocity = spurtCurve.Evaluate(currentSpurt / spurtDuration) * speed;
+
+        rigid.MovePosition(rigid.position + direction * velocity);
     }
 
 
