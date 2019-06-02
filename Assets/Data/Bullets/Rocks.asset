@@ -15,7 +15,7 @@ MonoBehaviour:
   speed: 15
   damage: 1
   lifeTime: 1.5
-  colliderSize: 0.1
+  colliderSize: 0.8
   graphic: {fileID: -7309617371510909752, guid: 9bfcbcc522342594eb0c00cbab5264da,
     type: 3}
   material: {fileID: 2100000, guid: 867ebdda794e9124c9c9268b7a6e7680, type: 2}
