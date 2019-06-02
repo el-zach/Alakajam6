@@ -11,8 +11,10 @@ public class BotConfiguator : MonoBehaviour
     {
         if (singleton == null)
             singleton = this;
-        else
-            Debug.LogError("Too many Bot Configurators", gameObject);
+        else { 
+            Debug.LogWarning("Too many Bot Configurators", gameObject);
+            Destroy(gameObject);
+        }
 
         //GetAllBots();
     }
@@ -331,7 +333,7 @@ public class BotConfiguator : MonoBehaviour
         {
             if (botData==null)
             {
-                Debug.LogError("[NewBot] MISSING BOTDATA");
+                Debug.LogWarning("[NewBot] MISSING BOTDATA");
                 return;
             }
             name = botData.botName;
