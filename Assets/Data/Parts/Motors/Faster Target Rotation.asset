@@ -9,10 +9,10 @@ MonoBehaviour:
   m_GameObject: {fileID: 0}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 6b9bd68f152217b4799904679c9e76ef, type: 3}
-  m_Name: The Hammer
+  m_Script: {fileID: 11500000, guid: 423bfa5b988a6cd40823f80d8ab2f11f, type: 3}
+  m_Name: Faster Target Rotation
   m_EditorClassIdentifier: 
-  prefab: {fileID: 4782332100201450142, guid: 379f0cdd9b91dba41b132bc2a7579fd0, type: 3}
+  prefab: {fileID: 5080228387316013519, guid: 0039f8d9a22720d479216e7f9f0a3c10, type: 3}
   attachedTo: {fileID: 0}
   attachmentPoint: {x: 0, y: 0, z: 0}
   weight: 0

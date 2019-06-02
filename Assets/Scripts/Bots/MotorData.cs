@@ -1,3 +1,6 @@
-﻿public class MotorData : PartData
+﻿using UnityEngine;
+
+[CreateAssetMenu]
+public class MotorData : PartData
 {
 }

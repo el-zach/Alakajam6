@@ -9,10 +9,10 @@ MonoBehaviour:
   m_GameObject: {fileID: 0}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 6b9bd68f152217b4799904679c9e76ef, type: 3}
-  m_Name: Heavy Canon
+  m_Script: {fileID: 11500000, guid: e05722a01757f14449c48df2d4b69d88, type: 3}
+  m_Name: Rock Shield
   m_EditorClassIdentifier: 
-  prefab: {fileID: 4782332100201450142, guid: 98a0a98ccbcd9fb4387c4069cda93630, type: 3}
+  prefab: {fileID: 7810112508940031172, guid: 202c888829039114c967b6e0acf2a560, type: 3}
   attachedTo: {fileID: 0}
   attachmentPoint: {x: 0, y: 0, z: 0}
   weight: 0

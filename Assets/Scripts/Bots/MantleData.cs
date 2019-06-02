@@ -1,3 +1,6 @@
-﻿public class MantleData : PartData
+﻿using UnityEngine;
+
+[CreateAssetMenu]
+public class MantleData : PartData
 {
 }
