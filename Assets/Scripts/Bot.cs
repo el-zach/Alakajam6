@@ -11,6 +11,7 @@ public class Bot : MonoBehaviour
     [Header("Stats")]
     public float maxHealth=10f;
     public float weight=1f;
+    public AnimationCurve spurtCurve;
     public float speed=1f;
     public float spurtDuration=1f;
     public float spurtCooldown=0.2f;
@@ -32,11 +33,13 @@ public class Bot : MonoBehaviour
     public int shots;
     public float salveCooldown;
 
+    Quaternion startRotation;
+    public Quaternion targetRotation;
+
     [Header("System stuff")]
     public BotData data;
     public GameObject wheels, chassis, weapon, motor, mantle;
     public UnityEvent OnAttack= new UnityEvent(), OnMove = new UnityEvent(), OnUpdate = new UnityEvent();
-    public AnimationCurve spurtCurve;
     Rigidbody rigid;
 
 
@@ -52,7 +55,9 @@ public class Bot : MonoBehaviour
         spurtCurve = data.wheels.spurtCurve;
         speed = data.wheels.speed;
         spurtDuration = data.wheels.spurtDuration;
+        currentSpurt = spurtDuration;
         spurtCooldown = data.wheels.spurtCooldown;
+
     }
 
     private void Update()
@@ -83,7 +88,9 @@ public class Bot : MonoBehaviour
     void Turn()
     {
         //rigid.MoveRotation(Quaternion.LookRotation(Vector3.Lerp(transform.forward, movementInput.normalized, 0.5f)));
-        rigid.MoveRotation(Quaternion.LookRotation(movementInput.normalized));
+        //rigid.MoveRotation(Quaternion.LookRotation(movementInput.normalized));
+        targetRotation = Quaternion.LookRotation(movementInput.normalized);
+        startRotation = transform.rotation;
     }
 
     void Spurt()
@@ -101,6 +108,7 @@ public class Bot : MonoBehaviour
         float velocity = spurtCurve.Evaluate(currentSpurt / spurtDuration) * speed * Time.deltaTime;
 
         rigid.MovePosition(rigid.position + direction * velocity);
+        rigid.MoveRotation(Quaternion.Lerp(startRotation,targetRotation,2f*currentSpurt/spurtDuration));
     }
 
 

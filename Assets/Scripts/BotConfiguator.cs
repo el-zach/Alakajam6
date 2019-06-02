@@ -103,6 +103,8 @@ public class BotConfiguator : MonoBehaviour
         script.motor = InstantiateFromPart(bot.motor, script, script.weapon.transform);
         script.mantle = InstantiateFromPart(bot.mantle, script, script.chassis.transform);
 
+        newBot.AddComponent<PlayerInput>();
+
         return newBot;
     }
 
