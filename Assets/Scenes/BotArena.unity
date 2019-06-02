@@ -662,8 +662,8 @@ Transform:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 1316897274}
-  m_LocalRotation: {x: -0.059922382, y: -0.9019822, z: 0.40638602, w: -0.13299593}
-  m_LocalPosition: {x: -3.5872097, y: 15.009684, z: 11.496886}
+  m_LocalRotation: {x: -0.22333252, y: 0.77308965, z: -0.45909846, w: -0.37640882}
+  m_LocalPosition: {x: 19.073915, y: 40.584927, z: 14.948468}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children: []
   m_Father: {fileID: 0}
@@ -838,13 +838,14 @@ GameObject:
   - component: {fileID: 1475102106}
   - component: {fileID: 1475102109}
   - component: {fileID: 1475102110}
+  - component: {fileID: 1475102111}
   m_Layer: 0
   m_Name: New Game Object
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 1
+  m_IsActive: 0
 --- !u!114 &1475102106
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -859,14 +860,17 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   maxHealth: 0
   weight: 0
-  speed: 0
-  spurtDuration: 0
-  spurtCooldown: 0
+  speed: 25
+  spurtDuration: 0.75
+  spurtCooldown: 0.05
+  rotationalSpeed: 60
   fireRate: 0
   salveCount: 0
   movementInput: {x: 0, y: 0, z: 0}
   aimingAt: {fileID: 0}
   health: 0
+  currentSpurt: 0
+  currentSpurtCooldown: 0
   shotCooldown: 0
   shots: 0
   salveCooldown: 0
@@ -891,6 +895,39 @@ MonoBehaviour:
       m_Calls: []
     m_TypeName: UnityEngine.Events.UnityEvent, UnityEngine.CoreModule, Version=0.0.0.0,
       Culture=neutral, PublicKeyToken=null
+  spurtCurve:
+    serializedVersion: 2
+    m_Curve:
+    - serializedVersion: 3
+      time: 0
+      value: 0
+      inSlope: 2
+      outSlope: 2
+      tangentMode: 0
+      weightedMode: 0
+      inWeight: 0
+      outWeight: 0
+    - serializedVersion: 3
+      time: 0.5077935
+      value: 0.99497056
+      inSlope: -0.20255437
+      outSlope: -0.20255437
+      tangentMode: 0
+      weightedMode: 0
+      inWeight: 0.22809698
+      outWeight: 0.5610621
+    - serializedVersion: 3
+      time: 1
+      value: 0
+      inSlope: 0
+      outSlope: 0
+      tangentMode: 0
+      weightedMode: 0
+      inWeight: 0
+      outWeight: 0
+    m_PreInfinity: 2
+    m_PostInfinity: 2
+    m_RotationOrder: 4
 --- !u!114 &1475102107
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -911,7 +948,7 @@ Transform:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 1475102105}
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: 0, y: 0.61, z: 0}
+  m_LocalPosition: {x: 11.81, y: 0.61, z: -3.02}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children:
   - {fileID: 1138204831}
@@ -947,6 +984,19 @@ BoxCollider:
   serializedVersion: 2
   m_Size: {x: 2.59, y: 2, z: 2.34}
   m_Center: {x: 0, y: 1, z: 0}
+--- !u!114 &1475102111
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1475102105}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: cdc7b7595caf6804c99c93520e0d4db1, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  bot: {fileID: 0}
 --- !u!1 &1515123891
 GameObject:
   m_ObjectHideFlags: 0
@@ -1006,7 +1056,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 0
+  m_IsActive: 1
 --- !u!114 &1567896891
 MonoBehaviour:
   m_ObjectHideFlags: 0

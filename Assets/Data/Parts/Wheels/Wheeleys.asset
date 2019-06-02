@@ -18,3 +18,39 @@ MonoBehaviour:
   weight: 0.2
   maxHealth: 3
   logic: {fileID: 0}
+  spurtCurve:
+    serializedVersion: 2
+    m_Curve:
+    - serializedVersion: 3
+      time: 0
+      value: 0
+      inSlope: 2
+      outSlope: 2
+      tangentMode: 0
+      weightedMode: 0
+      inWeight: 0
+      outWeight: 0
+    - serializedVersion: 3
+      time: 0.5077935
+      value: 0.99497056
+      inSlope: -0.20255437
+      outSlope: -0.20255437
+      tangentMode: 0
+      weightedMode: 0
+      inWeight: 0.22809698
+      outWeight: 0.5610621
+    - serializedVersion: 3
+      time: 1
+      value: 0
+      inSlope: 0
+      outSlope: 0
+      tangentMode: 0
+      weightedMode: 0
+      inWeight: 0
+      outWeight: 0
+    m_PreInfinity: 2
+    m_PostInfinity: 2
+    m_RotationOrder: 4
+  speed: 25
+  spurtDuration: 0.75
+  spurtCooldown: 0.01

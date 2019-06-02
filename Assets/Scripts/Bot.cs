@@ -14,6 +14,9 @@ public class Bot : MonoBehaviour
     public float speed=1f;
     public float spurtDuration=1f;
     public float spurtCooldown=0.2f;
+
+    public float rotationalSpeed=1f;
+
     public float fireRate;
     public int salveCount;
 
@@ -40,6 +43,16 @@ public class Bot : MonoBehaviour
     private void Start()
     {
         rigid = GetComponent<Rigidbody>();
+        SetupFromBotData();
+    }
+
+    void SetupFromBotData()
+    {
+        //-----wheels-----//
+        spurtCurve = data.wheels.spurtCurve;
+        speed = data.wheels.speed;
+        spurtDuration = data.wheels.spurtDuration;
+        spurtCooldown = data.wheels.spurtCooldown;
     }
 
     private void Update()
@@ -51,7 +64,12 @@ public class Bot : MonoBehaviour
 
     private void Move()
     {
-        if (currentSpurtCooldown == 0f)
+        if (currentSpurt >= spurtDuration)
+            currentSpurtCooldown += Time.deltaTime;
+        else
+            currentSpurtCooldown = 0f;
+
+        if (currentSpurtCooldown >= spurtCooldown)
         {
             if (movementInput != Vector3.zero)
             {
@@ -64,7 +82,8 @@ public class Bot : MonoBehaviour
 
     void Turn()
     {
-        rigid.MoveRotation(Quaternion.LookRotation(Vector3.Lerp(transform.forward, movementInput.normalized, 0.5f)));
+        //rigid.MoveRotation(Quaternion.LookRotation(Vector3.Lerp(transform.forward, movementInput.normalized, 0.5f)));
+        rigid.MoveRotation(Quaternion.LookRotation(movementInput.normalized));
     }
 
     void Spurt()
@@ -79,7 +98,7 @@ public class Bot : MonoBehaviour
 
         currentSpurt += Time.deltaTime;
         Vector3 direction = transform.forward;
-        float velocity = spurtCurve.Evaluate(currentSpurt / spurtDuration) * speed;
+        float velocity = spurtCurve.Evaluate(currentSpurt / spurtDuration) * speed * Time.deltaTime;
 
         rigid.MovePosition(rigid.position + direction * velocity);
     }

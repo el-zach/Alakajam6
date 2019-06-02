@@ -88,23 +88,32 @@ public class BotConfiguator : MonoBehaviour
     public GameObject GenerateBotFromData(BotData bot)
     {
         GameObject newBot = new GameObject();
+        newBot.name = bot.botName;
         newBot.transform.position = transform.position;
         newBot.AddComponent<BotBrain>();
+        var bCol = newBot.AddComponent<BoxCollider>();
+        bCol.center = Vector3.up;
+        bCol.size = new Vector3(2.5f,2f,2.5f);
+        newBot.AddComponent<Rigidbody>();
         var script = newBot.AddComponent<Bot>();
-        script.wheels = InstantiateFromPart(bot.wheels,newBot.transform);
-        script.chassis = InstantiateFromPart(bot.chassis, script.wheels.transform);
-        script.weapon = InstantiateFromPart(bot.weapon, script.chassis.transform);
-        script.motor = InstantiateFromPart(bot.motor, script.weapon.transform);
-        script.mantle = InstantiateFromPart(bot.mantle, script.chassis.transform);
+        script.data = bot;
+        script.wheels = InstantiateFromPart(bot.wheels, script, newBot.transform);
+        script.chassis = InstantiateFromPart(bot.chassis, script, script.wheels.transform);
+        script.weapon = InstantiateFromPart(bot.weapon, script, script.chassis.transform);
+        script.motor = InstantiateFromPart(bot.motor, script, script.weapon.transform);
+        script.mantle = InstantiateFromPart(bot.mantle, script, script.chassis.transform);
 
         return newBot;
     }
 
-    public GameObject InstantiateFromPart(PartData part, Transform attachedTo = null)
+    public GameObject InstantiateFromPart(PartData part, Bot _bot, Transform attachedTo = null)
     {
         Transform parent = attachedTo ? attachedTo : transform;
         GameObject clone = Instantiate(part.prefab, parent);
-
+        if (part.logic)
+        {
+            part.logic.Register(_bot, clone);
+        }
         return clone;
     }
 

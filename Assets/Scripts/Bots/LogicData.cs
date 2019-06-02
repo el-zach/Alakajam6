@@ -12,30 +12,44 @@ public class LogicData : ScriptableObject
     public class LogicBlock
     {
         public TriggerType triggerType;
-        public Vector3 rotation;
         public GameObject executeOn;
+        Bot bot;
 
-        public void Register(Bot bot, GameObject _toExecuteOn)
+        [Header("Rotator")]
+        public bool isRotator = false;
+        public float rotationLimit = 0f;
+
+
+        public void Register(Bot _bot, GameObject _toExecuteOn)
         {
+            bot = _bot;
             executeOn = _toExecuteOn;
 
             if (triggerType == TriggerType.Update)
             {
-                bot.OnUpdate.AddListener(Execute);
+                _bot.OnUpdate.AddListener(Execute);
             }
             if (triggerType == TriggerType.Attack)
             {
-                bot.OnAttack.AddListener(Execute);
+                _bot.OnAttack.AddListener(Execute);
             }
             if (triggerType == TriggerType.Movement)
             {
-                bot.OnMove.AddListener(Execute);
+                _bot.OnMove.AddListener(Execute);
             }
         }
 
         public void Execute()
         {
-            Debug.Log(triggerType);
+            if (isRotator)
+            {
+                if (rotationLimit == 0f)
+                    executeOn.transform.Rotate(Vector3.up * bot.rotationalSpeed * Time.deltaTime);
+                else
+                {
+                    executeOn.transform.localRotation = Quaternion.Euler(Vector3.up * Mathf.Sin(Time.time * bot.rotationalSpeed) * rotationLimit);
+                }
+            }
         }
 
     }

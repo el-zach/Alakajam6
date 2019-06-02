@@ -17,4 +17,5 @@ MonoBehaviour:
   attachmentPoint: {x: 0, y: 0.58, z: 0}
   weight: 1
   maxHealth: 10
-  logic: {fileID: 0}
+  logic: {fileID: 11400000, guid: 208ada9c0d77b4547955499c23bf9377, type: 2}
+  rotationalSpeed: 1
