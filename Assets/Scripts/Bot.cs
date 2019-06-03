@@ -42,13 +42,15 @@ public class Bot : MonoBehaviour
     public GameObject wheels, chassis, weapon, motor, mantle;
     public UnityEvent OnAttack= new UnityEvent(), OnMove = new UnityEvent(), OnUpdate = new UnityEvent();
     Rigidbody rigid;
+    public Collider myColider;
     public List<Collider> toExclude=new List<Collider>();
 
 
     private void Start()
     {
         rigid = GetComponent<Rigidbody>();
-        toExclude.Add(GetComponent<Collider>());
+        myColider = GetComponent<Collider>();
+        toExclude.Add(myColider);
         SetupFromBotData();
     }
 
@@ -87,14 +89,16 @@ public class Bot : MonoBehaviour
 
     void Shooting()
     {
-
+        //Debug.Log("This should be called once per frame: "+Time.frameCount);
         currentSalveCooldown += Time.deltaTime;
 
         if(currentSalveCooldown >= salveCooldown)
         {
             if( shotCooldown >= 1f/fireRate)
             {
+                //Debug.Log("cooldown firerate: "+shotCooldown + "/" + (1f / fireRate));
                 Shot();
+                //Debug.Log("Do we get here?");
                 shotCooldown = 0f;
                 shots++;
             }
@@ -114,6 +118,7 @@ public class Bot : MonoBehaviour
     {
         //Debug.Log("[Bot] Shoot!",gameObject);
         OnAttack.Invoke();
+        //Debug.Log("We invoked the shot");
     }
 
     private void Move()
@@ -162,6 +167,8 @@ public class Bot : MonoBehaviour
 
     public void DeRegisterBulletCollider(Bullet bullet)
     {
+        //Debug.Log("[BulletDeRegister] got called");
+        Physics.IgnoreCollision(myColider, bullet.myCollider,false);
         toExclude.Remove(bullet.myCollider);
     }
 

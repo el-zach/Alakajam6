@@ -67,7 +67,9 @@ public class LogicData : ScriptableObject
 
             if (isWeapon)
             {
+                //Debug.Log("This gets called how often?");
                 BulletManager.singleton.InstantiateBullet(bullet, executeOn.transform.position + executeOn.transform.forward * 0.5f, executeOn.transform.rotation, bullet.damage,bot);
+                //Debug.Log("We got out here atleast");
             }
 
         }

@@ -37,6 +37,7 @@ public class Bullet : MonoBehaviour
         myCollider = GetComponent<SphereCollider>();
         myCollider.radius = data.colliderSize;
         myOwner.toExclude.Add(myCollider);
+        OnBulletDespawn.AddListener(_owner.DeRegisterBulletCollider);
     }
 
     private void OnDisable()
@@ -48,7 +49,8 @@ public class Bullet : MonoBehaviour
     {
         yield return new WaitForSeconds(_time);
         //Destroy(this.gameObject);
-        myOwner.toExclude.Remove(myCollider);
+        if(myOwner)
+            myOwner.toExclude.Remove(myCollider);
         OnBulletDespawn.Invoke(this);
         gameObject.SetActive(false);
     }

@@ -47,6 +47,7 @@ public class Health : MonoBehaviour
         }*/
 
         OnDeath.Invoke(bot);
+        gameObject.SetActive(false);
     }
 
 
@@ -58,12 +59,18 @@ public class Health : MonoBehaviour
             {
                 Bullet bulletScript = contact.otherCollider.attachedRigidbody.GetComponent<Bullet>();
                 Damage(bulletScript.data.damage);
-                bot.toExclude.Add(contact.otherCollider);
-                bulletScript.OnBulletDespawn.AddListener(bot.DeRegisterBulletCollider);
+                //bot.toExclude.Add(contact.otherCollider);
+                Physics.IgnoreCollision(bot.myColider, contact.otherCollider);
+                bulletScript.OnBulletDespawn.AddListener(UnIgnoreCollision);
 
                 //Debug.Log(gameObject.name + " was dealt damage by " + contact.otherCollider.attachedRigidbody.gameObject.name);
             }
         }
+    }
+
+    void UnIgnoreCollision(Bullet bullet)
+    {
+        Physics.IgnoreCollision(bot.myColider, bullet.myCollider, false);
     }
 
 }

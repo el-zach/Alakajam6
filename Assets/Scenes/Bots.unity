@@ -1997,6 +1997,21 @@ PrefabInstance:
       propertyPath: m_Enabled
       value: 0
       objectReference: {fileID: 0}
+    - target: {fileID: 5323160908478311493, guid: 9c8b2f44e5533f24a9451838b755980b,
+        type: 3}
+      propertyPath: m_LocalPosition.x
+      value: -6.99
+      objectReference: {fileID: 0}
+    - target: {fileID: 5323160908478311493, guid: 9c8b2f44e5533f24a9451838b755980b,
+        type: 3}
+      propertyPath: m_LocalPosition.z
+      value: 2.17
+      objectReference: {fileID: 0}
+    - target: {fileID: 5323160908478311492, guid: 9c8b2f44e5533f24a9451838b755980b,
+        type: 3}
+      propertyPath: playerBot
+      value: 0
+      objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 9c8b2f44e5533f24a9451838b755980b, type: 3}
 --- !u!1001 &1503236954

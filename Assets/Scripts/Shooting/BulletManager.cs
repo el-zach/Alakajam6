@@ -16,6 +16,7 @@ public class BulletManager : MonoBehaviour
 
     public void InstantiateBullet(BulletData _bullet, Vector3 _pos, Quaternion _rot,float _damage, Bot _owner)
     {
+        //Debug.Log("This gets called a thousand times");
         _bullet.damage = _damage;
         if (useableBullets.Count != 0)
         {
@@ -35,12 +36,22 @@ public class BulletManager : MonoBehaviour
             SetupBullet(newBullet,_bullet,_owner);
             newBullet.SetActive(true);
         }
+
+        //Debug.Log("We got to the end of that");
     }
+
+    
 
     void SetupBullet(GameObject _bulletObject,BulletData _bullet, Bot _owner)
     {
+        //Debug.Log("I'm here");
         var bulletScript = _bulletObject.GetComponent<Bullet>();
         bulletScript.data = _bullet;
+        Collider myCollider = _bulletObject.GetComponent<Collider>();
+        /*Destroy(myCollider);
+        myCollider = _bulletObject.AddComponent<SphereCollider>();
+        bulletScript.myCollider = myCollider as SphereCollider;*/
+
         bulletScript.SetMeUp(_owner);
         //LayerMask.NameToLayer("PlayerBullets")
 
@@ -53,7 +64,6 @@ public class BulletManager : MonoBehaviour
         Physics.IgnoreCollision(_bulletObject.GetComponent<Collider>(), coll);*/
 
 
-        Collider myCollider = _bulletObject.GetComponent<Collider>();
         foreach (var collider in _owner.toExclude)
         {
             Physics.IgnoreCollision(myCollider, collider);
