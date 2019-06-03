@@ -62,7 +62,7 @@ public class BotConfiguator : MonoBehaviour
             //NumberOfActiveUsers = userList.fields.Length;
             GameSync.instance.results.Remove("Get Bots");
             GetBotsFromFields();
-            botCountText.text = "Bots in database: " + botList.fields.Length;
+            botCountText.text = "Bots in database: " + botList.fields.Length+"  ";
         }
 
         if (Input.GetKeyDown(KeyCode.K))
