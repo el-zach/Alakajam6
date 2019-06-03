@@ -45,7 +45,8 @@ public class BotBrain : MonoBehaviour
     IEnumerator SetTarget(float _time)
     {
         yield return new WaitForSeconds(_time);
-        myTarget.position = botIWantToDestroy.transform.position;
+        if(botIWantToDestroy && botIWantToDestroy.gameObject.activeSelf)
+            myTarget.position = botIWantToDestroy.transform.position;
         if(useBrain)
             StartCoroutine(SetTarget(Random.Range(0f,1.5f)));
     }

@@ -19,12 +19,19 @@ public class BotSpawn : MonoBehaviour
             if (botData)
             {
                 var newBot = BotConfiguator.GenerateBotFromData(botData, playerBot, false, transform);
-                if(enableOnDeath)
-                    newBot.GetComponent<Health>().OnDeath.AddListener(EnableOnDeath);
+                var healthScript = newBot.GetComponent<Health>();
+                if (enableOnDeath)
+                    healthScript.OnDeath.AddListener(EnableOnDeath);
                 if (WinCondition.singleton)
                 {
                     WinCondition.singleton.botCount++;
-                    newBot.GetComponent<Health>().OnDeath.AddListener(WinCondition.singleton.DeathOf);
+                    healthScript.OnDeath.AddListener(WinCondition.singleton.DeathOf);
+                }
+                var camScript = Camera.main.GetComponent<MultiPlayerCam>();
+                if (camScript)
+                {
+                    camScript.keepInFrame.Add(newBot.transform);
+                    healthScript.OnDeath.AddListener(camScript.TakeBotOutOfTargets);
                 }
             }
         } 
