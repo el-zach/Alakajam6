@@ -23,6 +23,7 @@ public class Bot : MonoBehaviour
 
     public float rotationalSpeed=1f;
 
+    public float damage = 1f;
     public float fireRate=3f;
     public int salveCount=5;
     public float salveCooldown = 2f;
@@ -73,6 +74,7 @@ public class Bot : MonoBehaviour
         fireRate = data.weapon.fireRate;
         salveCount = data.weapon.salveCount;
         salveCooldown = data.weapon.salveCooldown;
+        damage = data.weapon.logic.logicBlocks[0].bullet.damage;
 
         //----chassis---//
         rotationalSpeed = data.chassis.rotationalSpeed;
