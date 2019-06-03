@@ -15,8 +15,8 @@ MonoBehaviour:
   prefab: {fileID: 4782332100201450142, guid: 5cff91b55787efb42a5672f724bf7878, type: 3}
   attachedTo: {fileID: 0}
   attachmentPoint: {x: 0, y: 0, z: 0}
-  weight: 0
-  maxHealth: 0
+  weight: 1
+  maxHealth: 2
   logic: {fileID: 11400000, guid: b9298f1981de12f42b92fcfee3112ed2, type: 2}
   fireRate: 0.9
   salveCount: 2

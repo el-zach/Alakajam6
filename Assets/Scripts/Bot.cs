@@ -63,6 +63,10 @@ public class Bot : MonoBehaviour
 
     void SetupFromBotData()
     {
+        weight = 0f;
+        maxHealth = 0f;
+
+
         //-----wheels-----//
         spurtCurve = data.wheels.spurtCurve;
         speed = data.wheels.speed;
@@ -70,11 +74,17 @@ public class Bot : MonoBehaviour
         currentSpurt = spurtDuration;
         spurtCooldown = data.wheels.spurtCooldown;
 
+        weight += data.wheels.weight;
+        maxHealth += data.wheels.maxHealth;
+
         //-----weapon------//
         fireRate = data.weapon.fireRate;
         salveCount = data.weapon.salveCount;
         salveCooldown = data.weapon.salveCooldown;
         damage = data.weapon.logic.logicBlocks[0].bullet.damage;
+
+        weight += data.weapon.weight;
+        maxHealth += data.weapon.maxHealth;
 
         //----chassis---//
         rotationalSpeed = data.chassis.rotationalSpeed;
@@ -82,11 +92,22 @@ public class Bot : MonoBehaviour
         salveCount = Mathf.FloorToInt(salveCount * data.chassis.salveCountBonus);
         salveCooldown *= data.chassis.salveCooldownBonus;
 
+        weight += data.chassis.weight;
+        maxHealth += data.chassis.maxHealth;
+
         //-----Motor---//
         data.motor.ApplyMotorMultiplier(this);
 
+        weight += data.motor.weight;
+        maxHealth += data.motor.maxHealth;
+
         //----Mantle---//
         data.mantle.ApplyMultiplier(this);
+
+        weight += data.mantle.weight;
+        maxHealth += data.mantle.maxHealth;
+
+        rigid.mass = weight;
 
         shots = salveCount;
         currentSalveCooldown = Random.Range(0f, salveCooldown);
