@@ -148,6 +148,7 @@ public class BotConfiguator : MonoBehaviour
 
         myBotData = dat;
         activeBot = GenerateBotFromData(dat,generateBotWithPlayerInput, generatePreviewBot,transform);
+        activeBot.GetComponent<Bot>().inactive = true;
     }
 
     public void ColorizeRandom()

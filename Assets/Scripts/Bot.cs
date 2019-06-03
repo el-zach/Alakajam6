@@ -23,6 +23,7 @@ public class Bot : MonoBehaviour
     public float salveCooldown = 2f;
 
     [Header("Runtime Properties")]
+    public bool inactive = false;
     public Vector3 movementInput;
     public Transform aimingAt;
     public float health;
@@ -74,6 +75,9 @@ public class Bot : MonoBehaviour
         salveCount = Mathf.FloorToInt(salveCount * data.chassis.salveCountBonus);
         salveCooldown *= data.chassis.salveCooldownBonus;
 
+        //-----Motor---//
+        data.motor.ApplyMotorMultiplier(this);
+
         shots = salveCount;
         currentSalveCooldown = Random.Range(0f, salveCooldown);
         currentSpurtCooldown = Random.Range(0f, spurtCooldown);
@@ -82,8 +86,11 @@ public class Bot : MonoBehaviour
     private void Update()
     {
         OnUpdate.Invoke();
-        Move();
-        ComputeMovement();
+        if (!inactive)
+        {
+            Move();
+            ComputeMovement();
+        }
         Shooting();
     }
 
