@@ -21,6 +21,11 @@ public class BotSpawn : MonoBehaviour
                 var newBot = BotConfiguator.GenerateBotFromData(botData, playerBot, false, transform);
                 if(enableOnDeath)
                     newBot.GetComponent<Health>().OnDeath.AddListener(EnableOnDeath);
+                if (WinCondition.singleton)
+                {
+                    WinCondition.singleton.botCount++;
+                    newBot.GetComponent<Health>().OnDeath.AddListener(WinCondition.singleton.DeathOf);
+                }
             }
         } 
         catch(System.Exception e)

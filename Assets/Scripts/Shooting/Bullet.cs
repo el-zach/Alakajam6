@@ -19,6 +19,7 @@ public class Bullet : MonoBehaviour
         //yield return null;
         Rigidbody rigid = GetComponent<Rigidbody>();
         rigid.useGravity = data.useGravity;
+        rigid.mass = data.mass;
         rigid.velocity = Vector3.zero;
         rigid.angularVelocity = Vector3.zero;
         rigid.AddForce(transform.forward * data.speed, ForceMode.VelocityChange);

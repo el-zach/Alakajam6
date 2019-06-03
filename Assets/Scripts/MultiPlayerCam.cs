@@ -37,6 +37,8 @@ public class MultiPlayerCam : MonoBehaviour
 
     public Vector3 GetCenterPoint()
     {
+        if (keepInFrame.Count == 0)
+            return Vector3.zero;
         float allX=0f, allZ=0f;
         foreach(var trans in keepInFrame)
         {

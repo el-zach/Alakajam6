@@ -50,7 +50,7 @@ public class StatsUI : MonoBehaviour
         float aggro = (bot.fireRate + (bot.salveCount / bot.salveCooldown))*(1f+bot.damage);
         aggression.value = aggro;
         Debug.Log("agr: " + aggro);
-        float spd = (bot.speed / bot.spurtDuration);
+        float spd = bot.speed;//  / bot.spurtDuration;
         speed.value = spd;
         Debug.Log("spd: " + spd);
         float def = bot.maxHealth + bot.weight;

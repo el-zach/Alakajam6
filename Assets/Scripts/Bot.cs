@@ -168,7 +168,7 @@ public class Bot : MonoBehaviour
 
         if (currentSpurtCooldown >= spurtCooldown)
         {
-            if (movementInput != Vector3.zero)
+            if (movementInput.sqrMagnitude > 0.1f)
             {
                 Turn();
                 Spurt();
@@ -181,7 +181,10 @@ public class Bot : MonoBehaviour
     {
         //rigid.MoveRotation(Quaternion.LookRotation(Vector3.Lerp(transform.forward, movementInput.normalized, 0.5f)));
         //rigid.MoveRotation(Quaternion.LookRotation(movementInput.normalized));
-        targetRotation = Quaternion.LookRotation(movementInput.normalized);
+        if (movementInput != Vector3.zero)
+            targetRotation = Quaternion.LookRotation(movementInput.normalized);
+        else
+            targetRotation = transform.rotation;
         startRotation = transform.rotation;
     }
 

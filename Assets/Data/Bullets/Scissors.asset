@@ -17,6 +17,7 @@ MonoBehaviour:
   damageType: 3
   lifeTime: 1.5
   colliderSize: 0.5
+  mass: 0.2
   graphic: {fileID: -3975482339634711942, guid: 9bfcbcc522342594eb0c00cbab5264da,
     type: 3}
   material: {fileID: 2100000, guid: 7461b786899967a4db7c8eede1150bdd, type: 2}
