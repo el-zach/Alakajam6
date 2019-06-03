@@ -76,7 +76,7 @@ public class BotConfiguator : MonoBehaviour
     {
         GameSync.instance.GetData(
             jobName: "Get Bots",
-            parameters: new string[] { "type=get-all", "from=alakajamBots", "db=beyblade" }
+            parameters: new string[] { "type=get-all", "from="+GameSync.instance.tableName, "db=beyblade" }
         );
     }
 
@@ -305,7 +305,7 @@ public class BotConfiguator : MonoBehaviour
     {
         public string type = "put-data";
         public string db = "beyblade";
-        public string table = "alakajamBots";
+        public string table = GameSync.instance.tableName;
         public NewBot fields;
 
         public CreateBotRequest(NewBot _fields=null)
@@ -322,7 +322,7 @@ public class BotConfiguator : MonoBehaviour
 
             db = "beyblade";
 
-            table = "alakajamBots";
+            table = GameSync.instance.tableName;
 
             fields = _fields;
         }
@@ -333,7 +333,7 @@ public class BotConfiguator : MonoBehaviour
     {
         public string type = "update-data";
         public string db = "beyblade";
-        public string table = "alakajamBots";
+        public string table = GameSync.instance.tableName;
         public int id;
         public NewBot fields;
 
@@ -351,7 +351,7 @@ public class BotConfiguator : MonoBehaviour
 
             db = "beyblade";
 
-            table = "alakajamBots";
+            table = GameSync.instance.tableName;
 
             id = _id;
 

@@ -19,6 +19,8 @@ public class GameSync : MonoBehaviour
         }
     }
 
+    public string tableName = "alakajamBOTS";
+
     private string Server = @"https://gamesync.fumiko-game.com";
 
     public Dictionary<string, string> results = new Dictionary<string, string>();

@@ -345,6 +345,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: a127f72eafc7e7e439fdb52173ce9f7f, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  tableName: postjamBOTS
 --- !u!1 &3430222446595140023
 GameObject:
   m_ObjectHideFlags: 0
@@ -433,6 +434,8 @@ MonoBehaviour:
   - {fileID: 11400000, guid: b1382eb7ea53d3147b6e9dc9d02abfe9, type: 2}
   - {fileID: 11400000, guid: 2fee6c3e74e45ac47a070fa460a4b172, type: 2}
   - {fileID: 11400000, guid: 48a48bfe556c7a244a533a2a08acf224, type: 2}
+  - {fileID: 11400000, guid: eba178f1429352e488175532995d5bb7, type: 2}
+  - {fileID: 11400000, guid: 8d0bb947e3b0e854fa88a1734424104e, type: 2}
 --- !u!1 &3430222446651640827
 GameObject:
   m_ObjectHideFlags: 0
