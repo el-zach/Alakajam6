@@ -13,7 +13,8 @@ MonoBehaviour:
   m_Name: Rocks
   m_EditorClassIdentifier: 
   speed: 15
-  damage: 1
+  damage: 1.5
+  damageType: 1
   lifeTime: 1.5
   colliderSize: 0.8
   graphic: {fileID: -7309617371510909752, guid: 9bfcbcc522342594eb0c00cbab5264da,

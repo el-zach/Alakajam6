@@ -5,9 +5,14 @@ using UnityEngine.SceneManagement;
 
 public class DontDestroyOnLoadBehaviour : MonoBehaviour
 {
+    public static DontDestroyOnLoadBehaviour singleton;
     private void Awake()
     {
         DontDestroyOnLoad(gameObject);
+        if (singleton == null)
+            singleton = this;
+        else
+            Debug.LogWarning("Too many DontDestroyOnLoadBehaviours", gameObject);
     }
 
     public void LoadSceneAt(int i)
