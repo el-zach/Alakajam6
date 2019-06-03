@@ -11,6 +11,11 @@ public class Bot : MonoBehaviour
     [Header("Stats")]
     public float maxHealth=10f;
     public float weight=1f;
+
+    public float damageMultiplier_Rock = 1f;
+    public float damageMultiplier_Paper = 1f;
+    public float damageMultiplier_Scissors = 1f;
+
     public AnimationCurve spurtCurve;
     public float speed=1f;
     public float spurtDuration=1f;
@@ -77,6 +82,9 @@ public class Bot : MonoBehaviour
 
         //-----Motor---//
         data.motor.ApplyMotorMultiplier(this);
+
+        //----Mantle---//
+        data.mantle.ApplyMultiplier(this);
 
         shots = salveCount;
         currentSalveCooldown = Random.Range(0f, salveCooldown);

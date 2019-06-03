@@ -18,3 +18,7 @@ MonoBehaviour:
   weight: 0
   maxHealth: 0
   logic: {fileID: 0}
+  speed: 2
+  fireRate: 1.5
+  rotationSpeed: 2
+  magSize: 0.6
