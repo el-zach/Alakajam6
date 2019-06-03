@@ -376,6 +376,21 @@ PrefabInstance:
       propertyPath: m_SizeDelta.y
       value: 0
       objectReference: {fileID: 0}
+    - target: {fileID: 2935481723605519181, guid: bf8b4ddbc0ddd084f829e3897e4eb88a,
+        type: 3}
+      propertyPath: m_IsActive
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 2935481723605519183, guid: bf8b4ddbc0ddd084f829e3897e4eb88a,
+        type: 3}
+      propertyPath: m_Enabled
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 2935481723605519182, guid: bf8b4ddbc0ddd084f829e3897e4eb88a,
+        type: 3}
+      propertyPath: m_Enabled
+      value: 0
+      objectReference: {fileID: 0}
     - target: {fileID: 5304197558511560743, guid: bf8b4ddbc0ddd084f829e3897e4eb88a,
         type: 3}
       propertyPath: m_AnchorMin.y

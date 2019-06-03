@@ -10,14 +10,42 @@ public class WinCondition : MonoBehaviour
         if (singleton == null)
             singleton = this;
         else
+        {
+
             Debug.LogWarning("Too many WinConditionObjects", gameObject);
+        }
     }
 
+    public UnityEngine.Events.UnityEvent OnWin, OnLose;
+
     public int botCount = 0;
+    public Bot playerBot;
+
+    public bool roundIsDecided = false;
 
     public void DeathOf(Bot bot)
     {
+        botCount--;
+        if(botCount==1 && playerBot.gameObject.activeSelf && !roundIsDecided)
+        {
+            roundIsDecided = true;
+            OnWin.Invoke();
+        }
+    }
 
+    public void PlayerBotWasSpawned(Bot _bot)
+    {
+        playerBot = _bot;
+        _bot.GetComponent<Health>().OnDeath.AddListener(PlayerDeath);
+    }
+
+    void PlayerDeath(Bot _bot)
+    {
+        if (!roundIsDecided)
+        {
+            roundIsDecided = true;
+            OnLose.Invoke();
+        }
     }
 
     // Start is called before the first frame update

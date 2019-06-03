@@ -107,7 +107,8 @@ public class Bot : MonoBehaviour
         weight += data.mantle.weight;
         maxHealth += data.mantle.maxHealth;
 
-        rigid.mass = weight;
+        if(rigid)
+            rigid.mass = weight;
 
         shots = salveCount;
         currentSalveCooldown = Random.Range(0f, salveCooldown);
@@ -203,7 +204,11 @@ public class Bot : MonoBehaviour
         float velocity = spurtCurve.Evaluate(currentSpurt / spurtDuration) * speed * Time.deltaTime;
 
         rigid.MovePosition(rigid.position + direction * velocity);
-        rigid.MoveRotation(Quaternion.Lerp(startRotation,targetRotation,2f*currentSpurt/spurtDuration));
+        if (targetRotation.x == 0 && targetRotation.y == 0 && targetRotation.z == 0 && targetRotation.w == 0)
+            return;
+        var newRot = Quaternion.Lerp(startRotation, targetRotation, Mathf.Clamp01(2f * currentSpurt / spurtDuration));
+        if (!float.IsNaN(newRot.x) && !float.IsNaN(newRot.y) && !float.IsNaN(newRot.z) && !float.IsNaN(newRot.w))
+            rigid.MoveRotation(newRot);
     }
 
     public void DeRegisterBulletCollider(Bullet bullet)
