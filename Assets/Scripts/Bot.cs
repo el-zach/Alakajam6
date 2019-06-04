@@ -59,6 +59,7 @@ public class Bot : MonoBehaviour
         myColider = GetComponent<Collider>();
         toExclude.Add(myColider);
         SetupFromBotData();
+        GetComponent<Health>().OnDeath.AddListener(PlayDeathEffect);
     }
 
     void SetupFromBotData()
@@ -218,5 +219,17 @@ public class Bot : MonoBehaviour
         toExclude.Remove(bullet.myCollider);
     }
 
+    public void PlayDeathEffect(Bot _bot)
+    {
+        MeshRenderer[] rends = GetComponentsInChildren<MeshRenderer>();
+        foreach(var rend in rends)
+        {
+            rend.transform.SetParent(null);
+            var mColl = rend.gameObject.AddComponent<MeshCollider>();
+            mColl.sharedMesh = rend.GetComponent<MeshFilter>().sharedMesh;
+            mColl.convex = true;
+            rend.gameObject.AddComponent<Rigidbody>();
+        }
+    }
 
 }

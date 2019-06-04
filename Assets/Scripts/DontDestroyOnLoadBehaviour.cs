@@ -19,4 +19,15 @@ public class DontDestroyOnLoadBehaviour : MonoBehaviour
     {
         SceneManager.LoadScene(i);
     }
+
+    private void Update()
+    {
+        if (Input.GetKeyDown(KeyCode.N))
+        {
+            BotConfiguator.singleton.NameBot();
+            BotConfiguator.singleton.playerBotData = BotConfiguator.singleton.myBotData;
+            LoadSceneAt(3);
+        }
+    }
+
 }

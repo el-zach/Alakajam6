@@ -7,11 +7,11 @@ public class WinCondition : MonoBehaviour
     public static WinCondition singleton;
     private void Awake()
     {
-        if (singleton == null)
+        if (!singleton)
             singleton = this;
         else
         {
-
+            singleton = this;
             Debug.LogWarning("Too many WinConditionObjects", gameObject);
         }
     }
@@ -26,7 +26,7 @@ public class WinCondition : MonoBehaviour
     public void DeathOf(Bot bot)
     {
         botCount--;
-        if(botCount==1 && playerBot.gameObject.activeSelf && !roundIsDecided)
+        if(botCount==1 && bot != playerBot && playerBot.gameObject.activeSelf && !roundIsDecided)
         {
             roundIsDecided = true;
             OnWin.Invoke();
