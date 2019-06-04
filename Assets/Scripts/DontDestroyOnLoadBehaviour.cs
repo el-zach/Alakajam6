@@ -6,6 +6,7 @@ using UnityEngine.SceneManagement;
 public class DontDestroyOnLoadBehaviour : MonoBehaviour
 {
     public static DontDestroyOnLoadBehaviour singleton;
+    public bool skippingAvailable = false;
     private void Awake()
     {
         DontDestroyOnLoad(gameObject);
@@ -22,7 +23,7 @@ public class DontDestroyOnLoadBehaviour : MonoBehaviour
 
     private void Update()
     {
-        if (Input.GetKeyDown(KeyCode.N))
+        if (skippingAvailable && Input.GetKeyDown(KeyCode.N))
         {
             BotConfiguator.singleton.NameBot();
             BotConfiguator.singleton.playerBotData = BotConfiguator.singleton.myBotData;

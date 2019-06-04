@@ -64,11 +64,6 @@ public class BotConfiguator : MonoBehaviour
             GetBotsFromFields();
             botCountText.text = "Bots in database: " + botList.fields.Length+"  ";
         }
-
-        if (Input.GetKeyDown(KeyCode.K))
-        {
-            GetAllBots();
-        }
     }
 
     [ContextMenu("Get Bot Data From Server")]
