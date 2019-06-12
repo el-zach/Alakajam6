@@ -5,10 +5,10 @@ EditorBuildSettings:
   m_ObjectHideFlags: 0
   serializedVersion: 2
   m_Scenes:
-  - enabled: 1
+  - enabled: 0
     path: Assets/Scenes/Bots.unity
     guid: 29875944a3b4aee43b95e37de0e3f434
-  - enabled: 1
+  - enabled: 0
     path: Assets/Scenes/BotArena.unity
     guid: ceed96e2de5632a43a16125c1c7d187e
   m_configObjects: {}
