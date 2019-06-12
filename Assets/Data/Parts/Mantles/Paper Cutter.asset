@@ -16,5 +16,8 @@ MonoBehaviour:
   attachedTo: {fileID: 0}
   attachmentPoint: {x: 0, y: 0, z: 0}
   weight: 0
-  maxHealth: 0
+  maxHealth: 1
   logic: {fileID: 0}
+  defenseRock: 0.5
+  defensePaper: 2
+  defenseScissors: 1

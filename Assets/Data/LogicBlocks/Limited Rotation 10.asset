@@ -10,10 +10,13 @@ MonoBehaviour:
   m_Enabled: 1
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: 6fc84f17ecd65674d874578bb81ab6a5, type: 3}
-  m_Name: Limited Rotation
+  m_Name: Limited Rotation 10
   m_EditorClassIdentifier: 
   logicBlocks:
   - triggerType: 2
     executeOn: {fileID: 0}
+    bot: {fileID: 0}
     isRotator: 1
-    rotationLimit: 35
+    rotationLimit: 10
+    isWeapon: 0
+    bullet: {fileID: 0}

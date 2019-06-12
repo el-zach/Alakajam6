@@ -12,6 +12,7 @@ public class BotData : ScriptableObject {
     public ChassisData chassis;
     public MotorData motor;
     public MantleData mantle;
+    public Color color=Color.white;
     [Header("Dynamic")]
     public int killCount;
 }

@@ -7,48 +7,46 @@ public class MultiPlayerCam : MonoBehaviour
 
     public List<Transform> keepInFrame;
     public Vector3 offset;
-    public bool isReady = false;
 
     // Start is called before the first frame update
     void Start()
     {
-        StartCoroutine(WaitToDoStart(0.5f));
         offset = transform.position;
     }
 
     // Update is called once per frame
     void Update()
     {
-        if (keepInFrame.Count == 0 && isReady)
-        {
-            GetAllTargets();
-        }
 
-        if(isReady)
-            transform.position = GetCenterPoint() + offset;
+        transform.position = GetCenterPoint() + offset;
     }
 
-    IEnumerator WaitToDoStart(float _time)
-    {
-        yield return new WaitForSeconds(_time);
-        GetAllTargets();
-        isReady = true;
-    }
 
     public Vector3 GetCenterPoint()
     {
+        if (keepInFrame.Count == 0)
+            return Vector3.zero;
         float allX=0f, allZ=0f;
+        int number = 0;
         foreach(var trans in keepInFrame)
         {
-            allX += trans.position.x;
-            allZ += trans.position.z;
+            if (trans && trans.gameObject.activeSelf)
+            {
+                allX += trans.position.x;
+                allZ += trans.position.z;
+                number++;
+            }
         }
-        allX /= keepInFrame.Count;
-        allZ /= keepInFrame.Count;
+        if (number == 0)
+        {
+            return Vector3.zero;
+        }
+        allX /= number;
+        allZ /= number;
         return new Vector3(allX, 0f, allZ);
     }
 
-    public void GetAllTargets()
+    /*public void GetAllTargets()
     {
         keepInFrame = new List<Transform>();
         Bot[] allBots = FindObjectsOfType<Bot>();
@@ -58,7 +56,7 @@ public class MultiPlayerCam : MonoBehaviour
             keepInFrame.Add(bot.transform);
             bot.GetComponent<Health>().OnDeath.AddListener(TakeBotOutOfTargets);
         }
-    }
+    }*/
 
     public void TakeBotOutOfTargets(Bot bot)
     {

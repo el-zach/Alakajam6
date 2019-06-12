@@ -13,8 +13,11 @@ MonoBehaviour:
   m_Name: Plane
   m_EditorClassIdentifier: 
   speed: 9
-  damage: 1
+  damage: 2.5
+  damageType: 2
   lifeTime: 6
   colliderSize: 1.5
+  mass: 3
   graphic: {fileID: 1234322512982351993, guid: 9bfcbcc522342594eb0c00cbab5264da, type: 3}
   material: {fileID: 2100000, guid: 5ec7ee0a863eb284e8418b2a5500bfa3, type: 2}
+  useGravity: 0

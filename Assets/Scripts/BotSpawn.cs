@@ -4,10 +4,13 @@ using UnityEngine;
 
 public class BotSpawn : MonoBehaviour
 {
+    [System.Serializable]
+    public class Event : UnityEngine.Events.UnityEvent<Bot> { }
 
     public BotData botData;
     public bool playerBot = false;
-    public GameObject enableOnDeath;
+
+    public BotSpawn.Event OnSpawn;
 
     public void SpawnBot()
     {
@@ -19,19 +22,28 @@ public class BotSpawn : MonoBehaviour
             if (botData)
             {
                 var newBot = BotConfiguator.GenerateBotFromData(botData, playerBot, false, transform);
-                if(enableOnDeath)
-                    newBot.GetComponent<Health>().OnDeath.AddListener(EnableOnDeath);
+                var healthScript = newBot.GetComponent<Health>();
+                var botScript = newBot.GetComponent<Bot>();
+                if (WinCondition.singleton)
+                {
+                    WinCondition.singleton.botCount++;
+                    healthScript.OnDeath.AddListener(WinCondition.singleton.DeathOf);
+                    if (playerBot)
+                        WinCondition.singleton.playerBot = botScript;
+                }
+                var camScript = Camera.main.GetComponent<MultiPlayerCam>();
+                if (camScript)
+                {
+                    camScript.keepInFrame.Add(newBot.transform);
+                    healthScript.OnDeath.AddListener(camScript.TakeBotOutOfTargets);
+                }
+                OnSpawn.Invoke(botScript);
             }
         } 
         catch(System.Exception e)
         {
             Debug.LogWarning("exception on bot creation: " + e);
         }
-    }
-
-    void EnableOnDeath(Bot deadbot)
-    {
-        enableOnDeath.SetActive(true);
     }
 
     // Start is called before the first frame update
@@ -45,5 +57,12 @@ public class BotSpawn : MonoBehaviour
     {
         if (!botData)
             SpawnBot();
+    }
+
+    private void OnDrawGizmos()
+    {
+        if (!playerBot)
+            Gizmos.color = Color.red;
+        Gizmos.DrawWireSphere(transform.position + Vector3.up, 1f);
     }
 }

@@ -58,7 +58,7 @@ public class Health : MonoBehaviour
             if (contact.otherCollider.attachedRigidbody?.CompareTag("Bullet")??false)
             {
                 Bullet bulletScript = contact.otherCollider.attachedRigidbody.GetComponent<Bullet>();
-                Damage(bulletScript.data.damage);
+                Damage(DamageCalculation(bulletScript));
                 //bot.toExclude.Add(contact.otherCollider);
                 Physics.IgnoreCollision(bot.myColider, contact.otherCollider);
                 bulletScript.OnBulletDespawn.AddListener(UnIgnoreCollision);
@@ -71,6 +71,25 @@ public class Health : MonoBehaviour
     void UnIgnoreCollision(Bullet bullet)
     {
         Physics.IgnoreCollision(bot.myColider, bullet.myCollider, false);
+    }
+
+    float DamageCalculation(Bullet bullet)
+    {
+        float damage = bullet.data.damage;
+        switch (bullet.data.damageType)
+        {
+            case DamageType.Rock:
+                damage *= bot.damageMultiplier_Rock;
+                break;
+            case DamageType.Paper:
+                damage *= bot.damageMultiplier_Paper;
+                break;
+            case DamageType.Scissors:
+                damage *= bot.damageMultiplier_Scissors;
+                break;
+        }
+
+        return damage;
     }
 
 }

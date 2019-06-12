@@ -62,12 +62,7 @@ public class BotConfiguator : MonoBehaviour
             //NumberOfActiveUsers = userList.fields.Length;
             GameSync.instance.results.Remove("Get Bots");
             GetBotsFromFields();
-            botCountText.text = "Bots in database: " + botList.fields.Length;
-        }
-
-        if (Input.GetKeyDown(KeyCode.K))
-        {
-            GetAllBots();
+            botCountText.text = "Bots in database: " + botList.fields.Length+"  ";
         }
     }
 
@@ -76,7 +71,7 @@ public class BotConfiguator : MonoBehaviour
     {
         GameSync.instance.GetData(
             jobName: "Get Bots",
-            parameters: new string[] { "type=get-all", "from=alakajamBots", "db=beyblade" }
+            parameters: new string[] { "type=get-all", "from="+GameSync.instance.tableName, "db=beyblade" }
         );
     }
 
@@ -148,6 +143,7 @@ public class BotConfiguator : MonoBehaviour
 
         myBotData = dat;
         activeBot = GenerateBotFromData(dat,generateBotWithPlayerInput, generatePreviewBot,transform);
+        activeBot.GetComponent<Bot>().inactive = true;
     }
 
     public void ColorizeRandom()
@@ -162,15 +158,18 @@ public class BotConfiguator : MonoBehaviour
             var saturationMin = 0.2f;
             var saturationMax = 0.6f;
 
-            SetColor(bot.wheels, Random.ColorHSV(r - s, r + s, saturationMin, saturationMax));
-            SetColor(bot.chassis, Random.ColorHSV(r - s, r + s, saturationMin, saturationMax));
-            SetColor(bot.weapon, Random.ColorHSV(r - s, r + s, saturationMin, saturationMax));
-            SetColor(bot.motor, Random.ColorHSV(r - s, r + s, saturationMin, saturationMax));
-            SetColor(bot.mantle, Random.ColorHSV(r - s, r + s, saturationMin, saturationMax));
+            Color randColor = Random.ColorHSV(r - s, r + s, saturationMin, saturationMax);
+            bot.data.color = randColor;
+
+            SetColor(bot.wheels, randColor);
+            SetColor(bot.chassis, randColor);
+            SetColor(bot.weapon, randColor);
+            SetColor(bot.motor, randColor);
+            SetColor(bot.mantle, randColor);
         }
     }
 
-    void SetColor(GameObject go, Color c)
+    public static void SetColor(GameObject go, Color c)
     {
         var prop = new MaterialPropertyBlock();
         prop.SetColor("_BaseColor", c);
@@ -215,6 +214,11 @@ public class BotConfiguator : MonoBehaviour
         script.motor = InstantiateFromPart(bot.motor, script, script.weapon.transform);
         script.mantle = InstantiateFromPart(bot.mantle, script, script.chassis.transform);
 
+        SetColor(script.wheels, bot.color);
+        SetColor(script.chassis, bot.color);
+        SetColor(script.weapon, bot.color);
+        SetColor(script.motor, bot.color);
+        SetColor(script.mantle, bot.color);
 
         return newBot;
     }
@@ -257,7 +261,16 @@ public class BotConfiguator : MonoBehaviour
         newBot.motor = PartDatabase.singleton.parts[stringBot.motor] as MotorData;
         newBot.mantle = PartDatabase.singleton.parts[stringBot.mantle] as MantleData;
         newBot.killCount = stringBot.killCount;
-
+        Color col;
+        if (ColorUtility.TryParseHtmlString("#"+stringBot.color, out col))
+        {
+            newBot.color = col;
+        }
+        else
+        {
+            Debug.Log("Couldnt parse color, was: " + stringBot.color);
+            newBot.color = Color.white;
+        }
         return newBot;
     }
 
@@ -273,7 +286,7 @@ public class BotConfiguator : MonoBehaviour
         playerBotData.mantle = myBotData.mantle;
         playerBotData.weapon = myBotData.weapon;
         playerBotData.wheels = myBotData.wheels;
-        
+        playerBotData.color = myBotData.color;
     }
 
     public void SendBotToCloud(BotData botData)
@@ -305,7 +318,7 @@ public class BotConfiguator : MonoBehaviour
     {
         public string type = "put-data";
         public string db = "beyblade";
-        public string table = "alakajamBots";
+        public string table = GameSync.instance.tableName;
         public NewBot fields;
 
         public CreateBotRequest(NewBot _fields=null)
@@ -322,7 +335,7 @@ public class BotConfiguator : MonoBehaviour
 
             db = "beyblade";
 
-            table = "alakajamBots";
+            table = GameSync.instance.tableName;
 
             fields = _fields;
         }
@@ -333,7 +346,7 @@ public class BotConfiguator : MonoBehaviour
     {
         public string type = "update-data";
         public string db = "beyblade";
-        public string table = "alakajamBots";
+        public string table = GameSync.instance.tableName;
         public int id;
         public NewBot fields;
 
@@ -351,7 +364,7 @@ public class BotConfiguator : MonoBehaviour
 
             db = "beyblade";
 
-            table = "alakajamBots";
+            table = GameSync.instance.tableName;
 
             id = _id;
 
@@ -373,6 +386,7 @@ public class BotConfiguator : MonoBehaviour
         public int weapon;
         public int motor;
         public int mantle;
+        public string color;
         public int killCount=0;
 
         public void InitFromData(BotData botData)
@@ -396,6 +410,7 @@ public class BotConfiguator : MonoBehaviour
             mantle = PartDatabase.singleton.parts.FindIndex(x => x == botData.mantle);
 
             killCount = botData.killCount;
+            color = ColorUtility.ToHtmlStringRGB(botData.color);
 
             /*List<int> attachmentsInt = new List<int>();
             foreach(var part in botData.attachements)
